@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://wpl7cmclu0aw"]
+[gd_scene load_steps=31 format=3 uid="uid://wpl7cmclu0aw"]
 
 [ext_resource type="Texture2D" uid="uid://dbjfma4cij0qo" path="res://Sprites/Background/Good_ocean.png" id="1_7x5mi"]
 [ext_resource type="Texture2D" uid="uid://djffpy75ndj0j" path="res://Sprites/Player/Diver_hit.png" id="2_jnl2b"]
@@ -179,13 +179,15 @@ animations = [{
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_kqjjc"]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_1tbyp"]
+
 [node name="Scene" type="Node"]
 
 [node name="Scenario" type="Node2D" parent="."]
 
 [node name="Background" type="TextureRect" parent="Scenario"]
-offset_right = 2453.0
-offset_bottom = 647.0
+offset_right = 2455.0
+offset_bottom = 653.0
 texture = ExtResource("1_7x5mi")
 
 [node name="Player" type="Node2D" parent="."]
@@ -203,4 +205,13 @@ shape = SubResource("ConvexPolygonShape2D_kqjjc")
 
 [node name="Camera2D" type="Camera2D" parent="Player/CharacterBody2D"]
 position = Vector2(548, 261)
-zoom = Vector2(2, 2)
+limit_left = 0
+limit_top = 0
+limit_right = 2455
+limit_bottom = 650
+limit_smoothed = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(297, 150)
+sprite_frames = SubResource("SpriteFrames_1tbyp")
+frame_progress = 0.37616
