@@ -3,9 +3,11 @@ extends Camera2D
 @export var randomStrength: float = 30.0
 @export var shakeFade: float = 5.0
 @export var min_time: float = 0.0
-@export var max_time: float = 5.0
+@export var max_time: float = 10.0
 @export var shake_duration: float = 15.0
 @export var max_shake_strength: float = 10.0
+
+@onready var color_rect_with_shader = $Glitch
 
 var rng = RandomNumberGenerator.new()
 
@@ -14,6 +16,8 @@ var has_shaken: bool = false
 var is_shaking: bool = false
 
 func _ready() -> void:
+	if color_rect_with_shader:
+		color_rect_with_shader.hide()
 	start_random_shake_timer()
 
 func start_random_shake_timer():
@@ -40,14 +44,16 @@ func _on_shake_timeout():
 		duration_timer.start()
 
 func apply_shake(intensity: float):
-	shake_Strength = clamp(intensity, 0, max_shake_strength)  # Limita a intensidade para um valor máximo
+	shake_Strength = clamp(intensity, 0, max_shake_strength)
 	is_shaking = true
+	activate_shader()
 
 func adjust_shake_intensity(new_intensity: float):
 	shake_Strength = clamp(new_intensity, 0, max_shake_strength)
 
 func _on_shake_end():
 	is_shaking = false
+	deactivate_shader()
 
 func _process(delta: float) -> void:
 	if is_shaking:
@@ -58,3 +64,11 @@ func _process(delta: float) -> void:
 
 func randomOffset() -> Vector2:
 	return Vector2(rng.randf_range(-shake_Strength, shake_Strength), rng.randf_range(-shake_Strength, shake_Strength))
+
+func activate_shader() -> void:
+	if color_rect_with_shader:
+		color_rect_with_shader.show()
+
+func deactivate_shader() -> void:
+	if color_rect_with_shader:
+		color_rect_with_shader.hide()
