@@ -2,9 +2,9 @@ extends Camera2D
 
 @export var randomStrength: float = 30.0
 @export var shakeFade: float = 5.0
-@export var min_time: float = 0.0
-@export var max_time: float = 10.0
-@export var shake_duration: float = 15.0
+@export var min_time: float = 320.00
+@export var max_time: float = 360.00
+@export var shake_duration: float = 5.00
 @export var max_shake_strength: float = 10.0
 
 @onready var color_rect_with_shader = $Glitch
@@ -54,6 +54,9 @@ func adjust_shake_intensity(new_intensity: float):
 func _on_shake_end():
 	is_shaking = false
 	deactivate_shader()
+	
+	
+	get_tree().change_scene_to_file("res://Scenes/bad_ocean.tscn")
 
 func _process(delta: float) -> void:
 	if is_shaking:

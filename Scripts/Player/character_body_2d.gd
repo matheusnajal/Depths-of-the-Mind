@@ -12,6 +12,13 @@ func _physics_process(delta):
 	get_input()
 	move_and_slide()
 	
+	var new_position = global_position
+	# Aplicar a nova posição corrigida
+	
+	new_position.x = clamp(new_position.x, 0, 1920)
+	new_position.y = clamp(new_position.y, 0, 1080)
+
+	global_position = new_position
 	var is_sprinting = Input.is_action_pressed("Sprint")
 	
 	if is_sprinting == true:

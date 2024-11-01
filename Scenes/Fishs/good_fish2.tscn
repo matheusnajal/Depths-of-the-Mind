@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://cnum5ykym6sqg"]
+
+[ext_resource type="Script" path="res://Scripts/Fishs/good_fish2.gd" id="1_cbdwa"]
+[ext_resource type="Texture2D" uid="uid://bfjcex06ijrsw" path="res://Sprites/Fishes/Good/Fish2_good.png" id="1_qc0hj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_er7ad"]
+atlas = ExtResource("1_qc0hj")
+region = Rect2(0, 0, 54, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bgo1h"]
+atlas = ExtResource("1_qc0hj")
+region = Rect2(54, 0, 54, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gbx4s"]
+atlas = ExtResource("1_qc0hj")
+region = Rect2(108, 0, 54, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ywbh"]
+atlas = ExtResource("1_qc0hj")
+region = Rect2(162, 0, 54, 49)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5b5am"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_er7ad")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bgo1h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gbx4s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ywbh")
+}],
+"loop": true,
+"name": &"Swimming",
+"speed": 5.0
+}]
+
+[node name="GoodFish2" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+script = ExtResource("1_cbdwa")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+sprite_frames = SubResource("SpriteFrames_5b5am")
+animation = &"Swimming"
+frame = 1
+frame_progress = 0.878807
