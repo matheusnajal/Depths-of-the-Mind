@@ -2,8 +2,8 @@ extends Camera2D
 
 @export var randomStrength: float = 30.0
 @export var shakeFade: float = 5.0
-@export var min_time: float = 320.00
-@export var max_time: float = 360.00
+@export var min_time: float = 15.00
+@export var max_time: float = 45.00
 @export var shake_duration: float = 5.00
 @export var max_shake_strength: float = 10.0
 
@@ -56,7 +56,7 @@ func _on_shake_end():
 	deactivate_shader()
 	
 	
-	get_tree().change_scene_to_file("res://Scenes/bad_ocean.tscn")
+	get_tree().change_scene_to_file("res://Scenes/World/bad_ocean.tscn")
 
 func _process(delta: float) -> void:
 	if is_shaking:

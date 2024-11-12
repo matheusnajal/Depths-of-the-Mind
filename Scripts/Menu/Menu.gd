@@ -1,12 +1,13 @@
 extends Node
 
-@export var max_mobs: int = 5
+@export var max_mobs: int = 10
 @export var mob_scenes: Array = [preload("res://Scenes/Fishs/good_fish1.tscn"), preload("res://Scenes/Fishs/good_fish2.tscn"), preload("res://Scenes/Fishs/good_fish3.tscn")]
 var mobs_atual: int = 0
 
 @onready var spawn_timer = Timer.new()
 
 func _ready():
+	$VBoxContainer/StartButton.grab_focus()
 	add_child(spawn_timer)
 	spawn_timer.wait_time = 2.0
 	spawn_timer.one_shot = false
@@ -31,3 +32,9 @@ func spawn_mob():
 
 func _on_mob_removed():
 	mobs_atual -= 1
+
+func _on_start_button_pressed() -> void:
+	get_tree().change_scene_to_file("res://Scenes/World/ocean.tscn")
+
+func _on_exit_button_pressed() -> void:
+	get_tree().quit()

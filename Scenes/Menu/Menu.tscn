@@ -1,0 +1,122 @@
+[gd_scene load_steps=7 format=3 uid="uid://brdihfiknm5vk"]
+
+[ext_resource type="Script" path="res://Scripts/Menu/Menu.gd" id="1_31ubo"]
+[ext_resource type="Texture2D" uid="uid://dbjfma4cij0qo" path="res://Sprites/Background/Good_ocean.png" id="1_n3kvu"]
+[ext_resource type="Shader" path="res://Scripts/Effect.gdshader" id="3_2j1c1"]
+[ext_resource type="FontFile" uid="uid://b3ps5cdpj0hf2" path="res://Fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="3_50vnv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ttan4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dn7t6"]
+shader = ExtResource("3_2j1c1")
+shader_parameter/shake_power = 0.03
+shader_parameter/shake_rate = 0.01
+shader_parameter/shake_speed = 5.0
+shader_parameter/shake_block_size = 30.5
+shader_parameter/shake_color_rate = 0.01
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_31ubo")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_ttan4")
+position = Vector2(962.5, 825.5)
+scale = Vector2(2.55859, 2.84896)
+texture = ExtResource("1_n3kvu")
+
+[node name="ColorRect" type="ColorRect" parent="Sprite2D"]
+anchors_preset = -1
+anchor_top = -0.130208
+offset_left = -384.0
+offset_top = -272.0
+offset_right = 384.0
+offset_bottom = -95.0
+color = Color(0.243137, 0.47451, 0.866667, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Glitch" type="ColorRect" parent="Sprite2D"]
+material = SubResource("ShaderMaterial_dn7t6")
+offset_left = -1007.0
+offset_top = -562.837
+offset_right = 955.0
+offset_bottom = 559.163
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+offset_left = 866.0
+offset_top = 632.0
+offset_right = 1033.0
+offset_bottom = 740.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="StartButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../ExitButton")
+theme_override_colors/font_focus_color = Color(1, 1, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/icon_max_width = 10
+theme_override_fonts/font = ExtResource("3_50vnv")
+text = "Jogar"
+flat = true
+
+[node name="OptionsButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_focus_color = Color(1, 1, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/icon_max_width = 10
+theme_override_fonts/font = ExtResource("3_50vnv")
+text = "Opções"
+flat = true
+
+[node name="Credits" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_focus_color = Color(1, 1, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/icon_max_width = 10
+theme_override_fonts/font = ExtResource("3_50vnv")
+text = "Créditos"
+flat = true
+
+[node name="ExitButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../StartButton")
+theme_override_colors/font_focus_color = Color(1, 1, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/icon_max_width = 10
+theme_override_fonts/font = ExtResource("3_50vnv")
+text = "Sair"
+flat = true
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 1945.0
+offset_bottom = 1099.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("3_50vnv")
+theme_override_font_sizes/font_size = 50
+text = "Depths of the Mind"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
