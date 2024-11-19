@@ -43,6 +43,9 @@
         <mxCell id="DNsbt84PIh2vWpGsc9Ce-18" value="Tela de Próximo dia / Tela de Vitória" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="540" y="550" width="130" height="60" as="geometry" />
         </mxCell>
+        <mxCell id="DNsbt84PIh2vWpGsc9Ce-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="DNsbt84PIh2vWpGsc9Ce-19" target="DNsbt84PIh2vWpGsc9Ce-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
         <mxCell id="DNsbt84PIh2vWpGsc9Ce-19" value="Tela de créditos" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="540" y="550" width="130" height="60" as="geometry" />
         </mxCell>
