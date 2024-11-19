@@ -2,7 +2,31 @@ extends CharacterBody2D
 
 @export var speed = 400
 @onready var _animated_sprite = $AnimatedSprite2D
+@onready var oxygen_cylinder = get_node("/root/Ocean/CanvasLayer/TextureRect/TextEdit")
 var direction_right = true
+var oxygen = 100
+var oxygen_decrease_timer = Timer.new()
+
+func _ready():
+	add_child(oxygen_decrease_timer)
+	oxygen_decrease_timer.wait_time = 3.0
+	oxygen_decrease_timer.one_shot = false
+	oxygen_decrease_timer.connect("timeout", Callable(self, "_on_oxygen_decrease"))
+	oxygen_decrease_timer.start()
+
+func _on_oxygen_decrease():
+	oxygen -= 10
+	if oxygen < 0:
+		oxygen = 0
+	update_oxygen_cylinder()
+	
+	if oxygen <= 0:
+		print("Você morre afogado!")
+		oxygen_decrease_timer.stop()
+
+func update_oxygen_cylinder():
+	# Atualiza o texto do cilindro de oxigênio com base no nível de oxigênio
+	oxygen_cylinder.text = str(int(oxygen)) + "%"
 
 func get_input():
 	var input_direction = Input.get_vector("Left", "Right", "Up", "Down")
@@ -11,17 +35,16 @@ func get_input():
 func _physics_process(delta):
 	get_input()
 	move_and_slide()
-	
+
 	var new_position = global_position
-	# Aplicar a nova posição corrigida
-	
+
 	new_position.x = clamp(new_position.x, 0, 1920)
-	new_position.y = clamp(new_position.y, 0, 1080)
+	new_position.y = clamp(new_position.y, -100, 1080)
 
 	global_position = new_position
 	var is_sprinting = Input.is_action_pressed("Sprint")
-	
-	if is_sprinting == true:
+
+	if is_sprinting:
 		speed = 600
 	else:
 		speed = 400
