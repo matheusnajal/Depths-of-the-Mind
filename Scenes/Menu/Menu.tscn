@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://brdihfiknm5vk"]
+[gd_scene load_steps=8 format=3 uid="uid://brdihfiknm5vk"]
 
 [ext_resource type="Script" path="res://Scripts/Menu/Menu.gd" id="1_31ubo"]
 [ext_resource type="Texture2D" uid="uid://dbjfma4cij0qo" path="res://Sprites/Background/Good_ocean.png" id="1_n3kvu"]
 [ext_resource type="Shader" path="res://Scripts/Effect.gdshader" id="3_2j1c1"]
 [ext_resource type="FontFile" uid="uid://b3ps5cdpj0hf2" path="res://Fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="3_50vnv"]
+[ext_resource type="AudioStream" uid="uid://bk0hmvhac7cqq" path="res://Musics/A calming music of the sea.mp3" id="5_nmeat"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ttan4"]
 
@@ -117,6 +118,11 @@ theme_override_font_sizes/font_size = 50
 text = "Depths of the Mind"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_nmeat")
+autoplay = true
+parameters/looping = false
 
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

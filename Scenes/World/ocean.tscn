@@ -1,14 +1,16 @@
-[gd_scene load_steps=29 format=3 uid="uid://wpl7cmclu0aw"]
+[gd_scene load_steps=31 format=3 uid="uid://wpl7cmclu0aw"]
 
 [ext_resource type="Script" path="res://Scripts/Scene/main.gd" id="1_c6lr8"]
 [ext_resource type="Texture2D" uid="uid://dbjfma4cij0qo" path="res://Sprites/Background/Good_ocean.png" id="2_pf1n0"]
-[ext_resource type="Script" path="res://Scripts/Player/character_body_2d.gd" id="3_vmybt"]
+[ext_resource type="Script" path="res://Scripts/Player/Diver_Ocean.gd" id="3_vmybt"]
 [ext_resource type="Texture2D" uid="uid://dhcbmj5baagxv" path="res://Sprites/Player/Diver_idle.png" id="4_jws88"]
 [ext_resource type="Texture2D" uid="uid://cvfds7x2883tm" path="res://Sprites/Player/Diver_sprint.png" id="5_tabk0"]
 [ext_resource type="Texture2D" uid="uid://cmp77l3hg4a20" path="res://Sprites/Player/Diver_swimming.png" id="6_4yvro"]
 [ext_resource type="Script" path="res://Scripts/Scene/camera_2d.gd" id="7_0mwyo"]
 [ext_resource type="Shader" path="res://Scripts/Effect.gdshader" id="8_d8xho"]
 [ext_resource type="Texture2D" uid="uid://d2mv3d6as4ed" path="res://Sprites/Itens/cilindroOxigeni.png" id="9_dc0xy"]
+[ext_resource type="FontFile" uid="uid://b3ps5cdpj0hf2" path="res://Fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="10_rhyeh"]
+[ext_resource type="AudioStream" uid="uid://b85bucjtfnojr" path="res://Musics/Exploring the seabed.mp3" id="11_b74i0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nqgql"]
 
@@ -222,9 +224,15 @@ anchor_top = 0.566
 anchor_right = 0.5
 anchor_bottom = 0.566
 offset_left = -19.5
-offset_top = -14.466
-offset_right = 31.5
-offset_bottom = 14.534
+offset_top = -7.466
+offset_right = 24.5
+offset_bottom = 15.534
 theme_override_colors/background_color = Color(0, 0, 0, 0)
-theme_override_font_sizes/font_size = 15
+theme_override_fonts/font = ExtResource("10_rhyeh")
+theme_override_font_sizes/font_size = 9
 text = "100%"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_b74i0")
+autoplay = true
+parameters/looping = false

@@ -1,12 +1,15 @@
-[gd_scene load_steps=27 format=3 uid="uid://dwsgwx2e81w4"]
+[gd_scene load_steps=30 format=3 uid="uid://dwsgwx2e81w4"]
 
 [ext_resource type="Texture2D" uid="uid://dskp2e6nlahqs" path="res://Sprites/Background/Bad_ocean.png" id="1_m6ivg"]
-[ext_resource type="Script" path="res://Scripts/Player/character_body_2d.gd" id="2_2t8se"]
+[ext_resource type="Script" path="res://Scripts/Player/Diver_Bad_Ocean.gd" id="2_lutxf"]
 [ext_resource type="Texture2D" uid="uid://dhcbmj5baagxv" path="res://Sprites/Player/Diver_idle.png" id="3_jstnw"]
 [ext_resource type="Texture2D" uid="uid://cvfds7x2883tm" path="res://Sprites/Player/Diver_sprint.png" id="4_gvjaf"]
 [ext_resource type="Texture2D" uid="uid://cmp77l3hg4a20" path="res://Sprites/Player/Diver_swimming.png" id="5_r4tu0"]
 [ext_resource type="Script" path="res://Scripts/Scene/camera_2d.gd" id="6_8erdf"]
 [ext_resource type="Shader" path="res://Scripts/Effect.gdshader" id="7_e0gvr"]
+[ext_resource type="AudioStream" uid="uid://cse1640pnb5ao" path="res://Musics/fear of the bottom of the sea.mp3" id="8_vjoou"]
+[ext_resource type="Texture2D" uid="uid://d2mv3d6as4ed" path="res://Sprites/Itens/cilindroOxigeni.png" id="8_xm5dx"]
+[ext_resource type="FontFile" uid="uid://b3ps5cdpj0hf2" path="res://Fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="9_umdaf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1opvp"]
 
@@ -168,7 +171,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 position = Vector2(935, 559)
-script = ExtResource("2_2t8se")
+script = ExtResource("2_lutxf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
 sprite_frames = SubResource("SpriteFrames_n4tfd")
@@ -191,3 +194,39 @@ offset_left = -1007.0
 offset_top = -563.0
 offset_right = 955.0
 offset_bottom = 559.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.044
+anchor_top = 0.125
+anchor_right = 0.044
+anchor_bottom = 0.125
+offset_left = -86.48
+offset_top = -75.0
+offset_right = 86.52
+offset_bottom = 76.0
+texture = ExtResource("8_xm5dx")
+expand_mode = 1
+
+[node name="TextEdit" type="TextEdit" parent="CanvasLayer/TextureRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.566
+anchor_right = 0.5
+anchor_bottom = 0.566
+offset_left = -19.5
+offset_top = -7.466
+offset_right = 24.5
+offset_bottom = 15.534
+theme_override_colors/background_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = ExtResource("9_umdaf")
+theme_override_font_sizes/font_size = 9
+text = "100%"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_vjoou")
+autoplay = true
+parameters/looping = false

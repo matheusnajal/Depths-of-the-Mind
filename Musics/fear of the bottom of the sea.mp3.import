@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cse1640pnb5ao"
+path="res://.godot/imported/fear of the bottom of the sea.mp3-1da91ac70bc8f66191b595030cae639e.mp3str"
+
+[deps]
+
+source_file="res://Musics/fear of the bottom of the sea.mp3"
+dest_files=["res://.godot/imported/fear of the bottom of the sea.mp3-1da91ac70bc8f66191b595030cae639e.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
