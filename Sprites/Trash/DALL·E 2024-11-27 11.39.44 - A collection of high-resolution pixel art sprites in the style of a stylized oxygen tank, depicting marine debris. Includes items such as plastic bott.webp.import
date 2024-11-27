@@ -1,0 +1,34 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://pw482rp4jr2a"
+path="res://.godot/imported/DALL·E 2024-11-27 11.39.44 - A collection of high-resolution pixel art sprites in the style of a stylized oxygen tank, depicting marine debris. Includes items such as plastic bott.webp-0c6d4924885e3c1d375e80b8a4162676.ctex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://Sprites/Trash/DALL·E 2024-11-27 11.39.44 - A collection of high-resolution pixel art sprites in the style of a stylized oxygen tank, depicting marine debris. Includes items such as plastic bott.webp"
+dest_files=["res://.godot/imported/DALL·E 2024-11-27 11.39.44 - A collection of high-resolution pixel art sprites in the style of a stylized oxygen tank, depicting marine debris. Includes items such as plastic bott.webp-0c6d4924885e3c1d375e80b8a4162676.ctex"]
+
+[params]
+
+compress/mode=0
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=false
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=1
