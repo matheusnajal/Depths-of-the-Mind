@@ -23,18 +23,19 @@ func _physics_process(delta):
 	velocity = direction * speed
 	move_and_slide()
 
-	# Mantém o mob dentro dos limites da tela
-	position.x = clamp(position.x, 0, screen_size.x)
-	position.y = clamp(position.y, 0, screen_size.y)
+	# Verifica colisões
+	for i in range(get_slide_collision_count()):
+		var collision = get_slide_collision(i)
+		if collision:
+			# Inverte a direção ao colidir
+			direction = -direction
 
-	# Rotaciona a sprite na direção do movimento, com correção para a esquerda
-	var angle_degrees = direction.angle() * 180 / PI
-	if direction.x < 0:
-		animated_sprite.flip_h = true
-		animated_sprite.rotation_degrees = angle_degrees + 180  # Inverte o ângulo para a esquerda
-	else:
-		animated_sprite.flip_h = false
-		animated_sprite.rotation_degrees = angle_degrees
+	# Mantém o mob dentro dos limites da tela
+	global_position.x = clamp(global_position.x, 0, screen_size.x)
+	global_position.y = clamp(global_position.y, 0, screen_size.y)
+
+	# Ajusta apenas o flip horizontal
+	animated_sprite.flip_h = direction.x < 0
 
 func _on_change_direction():
 	# Define uma nova direção aleatória

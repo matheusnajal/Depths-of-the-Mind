@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d08xph5pbfqcr"
-path="res://.godot/imported/barcoARemo.webp-329715f1af0864c83d5a0311f94625dc.ctex"
+path="res://.godot/imported/barcoARemo.webp-30e65a0edee14f319f83303d1f172ddd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/World/barcoARemo.webp"
-dest_files=["res://.godot/imported/barcoARemo.webp-329715f1af0864c83d5a0311f94625dc.ctex"]
+source_file="res://Sprites/Itens/barcoARemo.webp"
+dest_files=["res://.godot/imported/barcoARemo.webp-30e65a0edee14f319f83303d1f172ddd.ctex"]
 
 [params]
 

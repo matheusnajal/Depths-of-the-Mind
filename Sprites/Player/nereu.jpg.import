@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7prcat6wxj3h"
-path="res://.godot/imported/RS.png-e39ac32c02a4bec6ae4d7588f4f4bc48.ctex"
+uid="uid://cd3a52vdd7jgh"
+path="res://.godot/imported/nereu.jpg-1d3efc35e32e765933e04ce0cca6853c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/World/RS.png"
-dest_files=["res://.godot/imported/RS.png-e39ac32c02a4bec6ae4d7588f4f4bc48.ctex"]
+source_file="res://Sprites/Player/nereu.jpg"
+dest_files=["res://.godot/imported/nereu.jpg-1d3efc35e32e765933e04ce0cca6853c.ctex"]
 
 [params]
 

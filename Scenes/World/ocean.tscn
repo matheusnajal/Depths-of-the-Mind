@@ -12,8 +12,8 @@
 [ext_resource type="FontFile" uid="uid://b3ps5cdpj0hf2" path="res://Fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="10_rhyeh"]
 [ext_resource type="AudioStream" uid="uid://b85bucjtfnojr" path="res://Musics/Exploring the seabed.mp3" id="11_b74i0"]
 [ext_resource type="Script" path="res://Scripts/Scene/hud.gd" id="12_h2k4d"]
-[ext_resource type="Texture2D" uid="uid://c7prcat6wxj3h" path="res://Scenes/World/RS.png" id="13_58u4o"]
-[ext_resource type="Texture2D" uid="uid://d08xph5pbfqcr" path="res://Scenes/World/barcoARemo.webp" id="14_jl1vj"]
+[ext_resource type="Texture2D" uid="uid://c7prcat6wxj3h" path="res://Sprites/Itens/RS.png" id="13_58u4o"]
+[ext_resource type="Texture2D" uid="uid://d08xph5pbfqcr" path="res://Sprites/Itens/barcoARemo.webp" id="14_jl1vj"]
 [ext_resource type="Script" path="res://Scripts/Scene/barco.gd" id="14_vvcuf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nqgql"]
@@ -180,20 +180,20 @@ font = ExtResource("10_rhyeh")
 font_size = 14
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vq2mh"]
-size = Vector2(214.5, 140)
+size = Vector2(214.5, 103)
 
 [node name="Ocean" type="Node"]
 script = ExtResource("1_c6lr8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_nqgql")
-position = Vector2(950.001, 814.5)
-scale = Vector2(2.52604, 2.73438)
+position = Vector2(966, 822.5)
+scale = Vector2(2.53646, 2.73437)
 texture = ExtResource("2_pf1n0")
 
 [node name="ColorRect" type="ColorRect" parent="Sprite2D"]
 anchors_preset = -1
-anchor_top = -0.130208
+anchor_top = -0.182292
 offset_left = -384.0
 offset_top = -272.0
 offset_right = 384.0
@@ -214,7 +214,7 @@ animation = &"Swimming"
 
 [node name="Camera2D" type="Camera2D" parent="Player/CharacterBody2D"]
 position = Vector2(-5, -1)
-zoom = Vector2(1.2, 1.2)
+zoom = Vector2(1.5, 1.5)
 limit_left = 0
 limit_top = 0
 limit_right = 1920
@@ -325,5 +325,5 @@ texture = ExtResource("14_jl1vj")
 expand_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Barco"]
-position = Vector2(3, 128)
+position = Vector2(3, 109.5)
 shape = SubResource("RectangleShape2D_vq2mh")
