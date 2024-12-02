@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://wpl7cmclu0aw"]
+[gd_scene load_steps=41 format=3 uid="uid://wpl7cmclu0aw"]
 
 [ext_resource type="Script" path="res://Scripts/Scene/main.gd" id="1_c6lr8"]
 [ext_resource type="Texture2D" uid="uid://dbjfma4cij0qo" path="res://Sprites/Background/Good_ocean.png" id="2_pf1n0"]
@@ -11,6 +11,10 @@
 [ext_resource type="Texture2D" uid="uid://d2mv3d6as4ed" path="res://Sprites/Itens/cilindroOxigeni.png" id="9_dc0xy"]
 [ext_resource type="FontFile" uid="uid://b3ps5cdpj0hf2" path="res://Fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="10_rhyeh"]
 [ext_resource type="AudioStream" uid="uid://b85bucjtfnojr" path="res://Musics/Exploring the seabed.mp3" id="11_b74i0"]
+[ext_resource type="Script" path="res://Scripts/Scene/hud.gd" id="12_h2k4d"]
+[ext_resource type="Texture2D" uid="uid://c7prcat6wxj3h" path="res://Sprites/Itens/RS.png" id="13_58u4o"]
+[ext_resource type="Texture2D" uid="uid://d08xph5pbfqcr" path="res://Sprites/Itens/barcoARemo.webp" id="14_jl1vj"]
+[ext_resource type="Script" path="res://Scripts/Scene/barco.gd" id="14_vvcuf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nqgql"]
 
@@ -152,18 +156,44 @@ shader_parameter/shake_speed = 5.0
 shader_parameter/shake_block_size = 30.5
 shader_parameter/shake_color_rate = 0.05
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_re5xx"]
+size = Vector2(59, 26)
+
+[sub_resource type="LabelSettings" id="LabelSettings_rlifx"]
+font = ExtResource("10_rhyeh")
+font_size = 25
+font_color = Color(0.486275, 0.662745, 0.360784, 1)
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_tt2ew"]
+font = ExtResource("10_rhyeh")
+font_color = Color(1, 1, 1, 0.972549)
+
+[sub_resource type="LabelSettings" id="LabelSettings_x6i7b"]
+font = ExtResource("10_rhyeh")
+font_size = 9
+font_color = Color(1, 1, 1, 0.854902)
+
+[sub_resource type="LabelSettings" id="LabelSettings_gst86"]
+font = ExtResource("10_rhyeh")
+font_size = 14
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vq2mh"]
+size = Vector2(214.5, 103)
+
 [node name="Ocean" type="Node"]
 script = ExtResource("1_c6lr8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_nqgql")
-position = Vector2(962.5, 825.5)
-scale = Vector2(2.55859, 2.84896)
+position = Vector2(966, 822.5)
+scale = Vector2(2.53646, 2.73437)
 texture = ExtResource("2_pf1n0")
 
 [node name="ColorRect" type="ColorRect" parent="Sprite2D"]
 anchors_preset = -1
-anchor_top = -0.130208
+anchor_top = -0.182292
 offset_left = -384.0
 offset_top = -272.0
 offset_right = 384.0
@@ -174,8 +204,8 @@ metadata/_edit_use_anchors_ = true
 [node name="Player" type="Node2D" parent="."]
 position = Vector2(992, 542)
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="Player"]
-collision_mask = 2
+[node name="CharacterBody2D" type="CharacterBody2D" parent="Player" groups=["Jogador"]]
+collision_mask = 6
 script = ExtResource("3_vmybt")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player/CharacterBody2D"]
@@ -184,7 +214,7 @@ animation = &"Swimming"
 
 [node name="Camera2D" type="Camera2D" parent="Player/CharacterBody2D"]
 position = Vector2(-5, -1)
-zoom = Vector2(1.2, 1.2)
+zoom = Vector2(1.5, 1.5)
 limit_left = 0
 limit_top = 0
 limit_right = 1920
@@ -201,9 +231,45 @@ offset_top = -556.0
 offset_right = 925.0
 offset_bottom = 566.0
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/CharacterBody2D"]
+position = Vector2(-2.5, 1)
+shape = SubResource("RectangleShape2D_re5xx")
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_b74i0")
+autoplay = true
+parameters/looping = false
+
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("12_h2k4d")
+
+[node name="dinheiroLabel" type="Label" parent="HUD"]
+offset_left = 208.0
+offset_top = 126.0
+offset_right = 293.0
+offset_bottom = 185.0
+text = "1"
+label_settings = SubResource("LabelSettings_rlifx")
+
+[node name="TextureRect" type="TextureRect" parent="HUD"]
+offset_left = 130.0
+offset_top = 97.0
+offset_right = 200.0
+offset_bottom = 164.0
+texture = ExtResource("13_58u4o")
+expand_mode = 1
+
+[node name="LvlItem" type="Label" parent="HUD"]
+offset_left = 132.0
+offset_top = 40.0
+offset_right = 233.0
+offset_bottom = 90.0
+text = "Lvl: 1"
+label_settings = SubResource("LabelSettings_tt2ew")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="HUD"]
+
+[node name="TextureRect" type="TextureRect" parent="HUD/CanvasLayer"]
 anchors_preset = -1
 anchor_left = 0.044
 anchor_top = 0.125
@@ -216,23 +282,48 @@ offset_bottom = 76.0
 texture = ExtResource("9_dc0xy")
 expand_mode = 1
 
-[node name="TextEdit" type="TextEdit" parent="CanvasLayer/TextureRect"]
+[node name="TextEdit" type="TextEdit" parent="HUD/CanvasLayer/TextureRect"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
 anchor_top = 0.566
 anchor_right = 0.5
 anchor_bottom = 0.566
-offset_left = -19.5
-offset_top = -7.466
-offset_right = 24.5
-offset_bottom = 15.534
+offset_left = -12.5
+offset_top = -6.466
+offset_right = 31.5
+offset_bottom = 16.534
 theme_override_colors/background_color = Color(0, 0, 0, 0)
 theme_override_fonts/font = ExtResource("10_rhyeh")
 theme_override_font_sizes/font_size = 9
-text = "100%"
+text = "99%"
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("11_b74i0")
-autoplay = true
-parameters/looping = false
+[node name="MensagemLabel" type="Label" parent="HUD"]
+offset_left = 798.0
+offset_top = 63.0001
+offset_right = 905.0
+offset_bottom = 86.0001
+label_settings = SubResource("LabelSettings_x6i7b")
+
+[node name="LixosRestantesLabel" type="Label" parent="HUD"]
+offset_left = 1098.0
+offset_top = 22.0
+offset_right = 1186.0
+offset_bottom = 63.0
+label_settings = SubResource("LabelSettings_gst86")
+
+[node name="Barco" type="Area2D" parent="."]
+position = Vector2(867, -71)
+script = ExtResource("14_vvcuf")
+
+[node name="TextureRect" type="TextureRect" parent="Barco"]
+offset_left = -116.0
+offset_top = -3.0
+offset_right = 126.0
+offset_bottom = 141.0
+texture = ExtResource("14_jl1vj")
+expand_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Barco"]
+position = Vector2(3, 109.5)
+shape = SubResource("RectangleShape2D_vq2mh")
