@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://wpl7cmclu0aw"]
+[gd_scene load_steps=42 format=3 uid="uid://wpl7cmclu0aw"]
 
 [ext_resource type="Script" path="res://Scripts/Scene/main.gd" id="1_c6lr8"]
 [ext_resource type="Texture2D" uid="uid://dbjfma4cij0qo" path="res://Sprites/Background/Good_ocean.png" id="2_pf1n0"]
@@ -179,6 +179,10 @@ font_color = Color(1, 1, 1, 0.854902)
 font = ExtResource("10_rhyeh")
 font_size = 14
 
+[sub_resource type="LabelSettings" id="LabelSettings_185ar"]
+font = ExtResource("10_rhyeh")
+font_size = 22
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vq2mh"]
 size = Vector2(214.5, 103)
 
@@ -311,6 +315,13 @@ offset_top = 22.0
 offset_right = 1186.0
 offset_bottom = 63.0
 label_settings = SubResource("LabelSettings_gst86")
+
+[node name="Dia" type="Label" parent="HUD"]
+offset_left = 640.0
+offset_top = 24.0
+offset_right = 750.0
+offset_bottom = 47.0
+label_settings = SubResource("LabelSettings_185ar")
 
 [node name="Barco" type="Area2D" parent="."]
 position = Vector2(867, -71)

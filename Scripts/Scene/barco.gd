@@ -3,9 +3,10 @@ extends Area2D
 var jogador_proximo = false
 
 # Dados dos aprimoramentos
-var niveis = [10, 30, 50, 70]  # Custos para os níveis 2 a 5
-var reducoes = [0.9, 0.7, 0.5, 0.3]  # Fatores multiplicativos do tempo de limpeza
-var nivel_maximo = 5  # Nível máximo do item de limpeza
+var niveis = [10, 20, 30, 50, 70]  # Custos para os níveis 2 a 6
+var reducoes = [0.9, 0.7, 0.5, 0.3, 0.1]  # Fatores multiplicativos do tempo de limpeza
+var nivel_maximo = 6  # Nível máximo do item de limpeza
+
 
 func _ready():
 	body_entered.connect(_on_body_entered)
