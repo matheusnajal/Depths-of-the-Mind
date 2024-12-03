@@ -3,7 +3,7 @@ extends CanvasLayer
 @onready var dinheiro_label = $dinheiroLabel
 @onready var mensagem_label = $MensagemLabel
 @onready var lvl_item_label = $LvlItem
-@onready var lixos_restantes_label = $LixosRestantesLabel  # Ajuste o caminho conforme necessário
+@onready var lixos_restantes_label = $LixosRestantesLabel
 @onready var dia_label = $Dia
 
 func update_lixos_restantes(qtd):

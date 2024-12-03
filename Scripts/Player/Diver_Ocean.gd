@@ -55,26 +55,21 @@ func _on_mensagem_desaparecer():
 func _physics_process(delta):
 	var input_direction = Input.get_vector("Left", "Right", "Up", "Down")
 	
-	# Ajuste da velocidade com aceleração e desaceleração
 	if input_direction != Vector2.ZERO:
 		velocity_direction = input_direction.normalized()
 		current_speed = min(current_speed + acceleration * delta, max_speed)
 	else:
 		current_speed = max(current_speed - deceleration * delta, 0)
 	
-	# Sprint
 	if Input.is_action_pressed("Sprint"):
 		current_speed = min(current_speed + acceleration * delta, max_speed * sprint_multiplier)
 
-	# Atualiza a velocidade e aplica movimento
 	velocity = velocity_direction * current_speed
 	move_and_slide()
 
-	# Limites do movimento no mundo
 	global_position.x = clamp(global_position.x, 0, 1920)
 	global_position.y = clamp(global_position.y, 0, 1080)
 
-	# Animações
 	update_animation(input_direction)
 
 func update_animation(input_direction):
@@ -82,44 +77,39 @@ func update_animation(input_direction):
 	var is_sprinting = Input.is_action_pressed("Sprint")
 	
 	if is_moving:
-		# Define a rotação e orientação horizontal da sprite
 		if input_direction.x > 0 and input_direction.y < 0:
-			_animated_sprite.rotation = -PI / 4  # Direita para cima
+			_animated_sprite.rotation = -PI / 4
 			_animated_sprite.flip_h = false
 		elif input_direction.x > 0 and input_direction.y > 0:
-			_animated_sprite.rotation = PI / 4  # Direita para baixo
+			_animated_sprite.rotation = PI / 4
 			_animated_sprite.flip_h = false
 		elif input_direction.x < 0 and input_direction.y < 0:
-			_animated_sprite.rotation = PI / 4  # Esquerda para cima
+			_animated_sprite.rotation = PI / 4
 			_animated_sprite.flip_h = true
 		elif input_direction.x < 0 and input_direction.y > 0:
-			_animated_sprite.rotation = -PI / 4  # Esquerda para baixo
+			_animated_sprite.rotation = -PI / 4
 			_animated_sprite.flip_h = true
 		elif input_direction.x > 0:
-			_animated_sprite.rotation = 0  # Direita
+			_animated_sprite.rotation = 0
 			_animated_sprite.flip_h = false
 		elif input_direction.x < 0:
-			_animated_sprite.rotation = 0  # Esquerda
+			_animated_sprite.rotation = 0
 			_animated_sprite.flip_h = true
 		elif input_direction.y < 0:
-			# Para cima, ajustando a rotação conforme a direção horizontal
 			if _animated_sprite.flip_h:
-				_animated_sprite.rotation = PI / 2  # Para cima (esquerda)
+				_animated_sprite.rotation = PI / 2
 			else:
-				_animated_sprite.rotation = -PI / 2  # Para cima (direita)
+				_animated_sprite.rotation = -PI / 2
 		elif input_direction.y > 0:
-			# Para baixo, ajustando a rotação conforme a direção horizontal
 			if _animated_sprite.flip_h:
-				_animated_sprite.rotation = -PI / 2  # Para baixo (esquerda)
+				_animated_sprite.rotation = -PI / 2
 			else:
-				_animated_sprite.rotation = PI / 2  # Para baixo (direita)
+				_animated_sprite.rotation = PI / 2
 
-		# Escolhe a animação correta
 		if is_sprinting:
 			_animated_sprite.play("Sprint")
 		else:
 			_animated_sprite.play("Swimming")
 	else:
-		# Reseta a rotação e animação para o estado idle
 		_animated_sprite.rotation = 0
 		_animated_sprite.play("Idle")
