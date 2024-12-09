@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dl1w0jfo10vxq"
+path="res://.godot/imported/Mar de Alegría.mp3-b4421adde733b765db564b0aff592fdc.mp3str"
+
+[deps]
+
+source_file="res://Musics/Mar de Alegría.mp3"
+dest_files=["res://.godot/imported/Mar de Alegría.mp3-b4421adde733b765db564b0aff592fdc.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -11,7 +11,7 @@ extends Node
 
 @export var lixo_path: String = "res://Scenes/World/trash.tscn"
 
-@export var screen_size: Vector2 = Vector2(800, 600)  # Resolução compacta
+@export var screen_size: Vector2 = Vector2(1920,1080)  # Resolução compacta
 
 func _ready() -> void:
 	$VBoxContainer/MenuButton.grab_focus()

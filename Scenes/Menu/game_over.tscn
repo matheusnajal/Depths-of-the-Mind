@@ -1,13 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://bo3ad6m7mo4j2"]
+[gd_scene load_steps=8 format=3 uid="uid://bo3ad6m7mo4j2"]
 
-[ext_resource type="Texture2D" uid="uid://dbjfma4cij0qo" path="res://Sprites/Background/Good_ocean.png" id="1_1nv00"]
-[ext_resource type="Script" path="res://game_over.gd" id="1_3dudm"]
-[ext_resource type="FontFile" uid="uid://b3ps5cdpj0hf2" path="res://Fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="2_ap8dv"]
+[ext_resource type="Script" path="res://Scripts/Menu/game_over.gd" id="1_gwada"]
+[ext_resource type="Texture2D" uid="uid://dbjfma4cij0qo" path="res://Sprites/Background/Good_ocean.png" id="2_cf0f0"]
+[ext_resource type="FontFile" uid="uid://b3ps5cdpj0hf2" path="res://Fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="3_s4kfn"]
+[ext_resource type="AudioStream" uid="uid://b8bpcjbbhypjs" path="res://Musics/Whispers of the Ocean.mp3" id="4_4v41n"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6hp85"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_dj6dl"]
-font = ExtResource("2_ap8dv")
+font = ExtResource("3_s4kfn")
 font_size = 100
 font_color = Color(1, 1, 0, 1)
 outline_size = 10
@@ -16,19 +17,19 @@ shadow_size = 10
 shadow_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_8uk8e"]
-font = ExtResource("2_ap8dv")
+font = ExtResource("3_s4kfn")
 font_size = 15
 outline_size = 5
 outline_color = Color(0, 0, 0, 1)
 
 [node name="Game Over" type="Node"]
-script = ExtResource("1_3dudm")
+script = ExtResource("1_gwada")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_6hp85")
 position = Vector2(966, 822.5)
 scale = Vector2(2.53646, 2.73437)
-texture = ExtResource("1_1nv00")
+texture = ExtResource("2_cf0f0")
 
 [node name="ColorRect" type="ColorRect" parent="Sprite2D"]
 anchors_preset = -1
@@ -101,7 +102,7 @@ theme_override_colors/font_focus_color = Color(1, 1, 0, 1)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 5
 theme_override_constants/icon_max_width = 10
-theme_override_fonts/font = ExtResource("2_ap8dv")
+theme_override_fonts/font = ExtResource("3_s4kfn")
 text = "Voltar ao menu"
 flat = true
 
@@ -112,9 +113,14 @@ theme_override_colors/font_focus_color = Color(1, 1, 0, 1)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 5
 theme_override_constants/icon_max_width = 10
-theme_override_fonts/font = ExtResource("2_ap8dv")
+theme_override_fonts/font = ExtResource("3_s4kfn")
 text = "Sair do jogo"
 flat = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_4v41n")
+autoplay = true
+parameters/looping = false
 
 [connection signal="pressed" from="VBoxContainer/MenuButton" to="." method="_on_menu_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

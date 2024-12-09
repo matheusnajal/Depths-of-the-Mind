@@ -6,18 +6,18 @@ extends CharacterBody2D
 @export var sprint_multiplier = 1.5
 
 @onready var _animated_sprite = $AnimatedSprite2D
-@onready var oxygen_cylinder = get_node("/root/Ocean/HUD/CanvasLayer/TextureRect/TextEdit")
+@onready var oxygen_cylinder = get_node("/root/Ocean/HUD/CanvasLayer/OxigenioBar/TextEdit")
 
 var current_speed = 0
 var velocity_direction = Vector2.ZERO
-var oxygen = 100
+var oxygen = 99
 var oxygen_decrease_timer = Timer.new()
 var mensagem_label = null
 
 func _ready():
 	GlobalSignals.player = self
 	add_child(oxygen_decrease_timer)
-	oxygen_decrease_timer.wait_time = 3.0
+	oxygen_decrease_timer.wait_time = 2.0
 	oxygen_decrease_timer.one_shot = false
 	oxygen_decrease_timer.connect("timeout", Callable(self, "_on_oxygen_decrease"))
 	oxygen_decrease_timer.start()
@@ -28,13 +28,13 @@ func _ready():
 	add_child(mensagem_label)
 
 func _on_oxygen_decrease():
-	oxygen -= 10
+	oxygen -= 1
 	if oxygen < 0:
 		oxygen = 0
 	update_oxygen_cylinder()
 	
 	if oxygen <= 0:
-		print("Você morre afogado!")
+		get_tree().change_scene_to_file("res://Scenes/Menu/game_over.tscn")
 		oxygen_decrease_timer.stop()
 
 func update_oxygen_cylinder():

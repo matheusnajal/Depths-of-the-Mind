@@ -35,13 +35,15 @@ var lixos_ativos = []
 @onready var hud = $HUD  # Certifique-se de que o caminho está correto
 @onready var jogador = $Player/CharacterBody2D  # Ajuste o caminho conforme necessário
 @onready var camera = $Player/CharacterBody2D/Camera2D  # Referência à câmera para ajustar surtos
-#@onready var victory_screen = $VictoryScreen  # Referência à tela de vitória
 
 @onready var music_player = $AudioStreamPlayer2D  # Ajuste o caminho, se necessário
 
 @onready var modified_music = load("res://Musics/fear of the bottom of the sea.mp3") as AudioStream
 @onready var original_music = load("res://Musics/Exploring the seabed.mp3") as AudioStream
 
+@onready var player = $Player/CharacterBody2D
+
+var in_modified_ocean: bool = false  # Novo estado para verificar o cenário
 
 func _ready():
 	add_child(spawn_timer)
@@ -80,7 +82,7 @@ func _ready():
 		print("Câmera encontrada: ", camera)
 
 func spawn_mob():
-	if mobs_atual >= max_mobs:
+	if mobs_atual >= max_mobs or in_modified_ocean:
 		return
 
 	var mob_scene = mob_scenes[randi() % mob_scenes.size()]
@@ -137,7 +139,7 @@ func _on_lixo_limpo():
 	else:
 		print("Erro: Referência ao HUD é null!")
 	
-	if qtdLixosAtuais <= 0:
+	if qtdLixosAtuais <= 0 and not in_modified_ocean:
 		advance_day()
 
 func _on_lixo_removido(lixo_instance):
@@ -158,6 +160,7 @@ func advance_day():
 		qtdLixos += trash_increment_per_day
 		max_mobs += max_mobs_increment_per_day
 
+		# Ajuste os tempos de surto na câmera
 		if camera != null:
 			camera.min_time = max(camera.min_time - surge_interval_decrement_per_day, min_surge_time_limit)
 			camera.max_time = max(camera.max_time - surge_interval_decrement_per_day, max_surge_time_limit)
@@ -165,33 +168,51 @@ func advance_day():
 		else:
 			print("Erro: Não foi possível ajustar os tempos de surto na câmera porque a referência está nula.")
 
+		# Atualize o HUD
 		if hud != null:
 			hud.update_dia(current_day)
 		else:
 			print("Erro: Referência ao HUD é null!")
 
+		# Atualize a quantidade de lixos atuais
 		qtdLixosAtuais = qtdLixos
 		if hud != null:
 			hud.update_lixos_restantes(qtdLixosAtuais)
 		else:
 			print("Erro: Referência ao HUD é null!")
 
+		# Gerar novos lixos
 		gerar_lixos()
+
+		# Resetar o oxigênio do jogador
+		reset_oxygen()
 	else:
 		end_game()
 
+func reset_oxygen():
+	player.oxygen = 99
+	player.update_oxygen_cylinder()
 
 func _on_background_changed_to_modified() -> void:
+	in_modified_ocean = true
 	if music_player:
 		music_player.stream = modified_music
 		music_player.play()
+	toggle_lixos_visibility(false)
 
 func _on_background_changed_to_original() -> void:
+	in_modified_ocean = false
 	if music_player:
 		music_player.stream = original_music
 		music_player.play()
+	toggle_lixos_visibility(true)
 
+func toggle_lixos_visibility(visible: bool) -> void:
+	for lixo in lixos_ativos:
+		lixo.visible = visible
+		lixo.set_process(visible)
 
 func end_game():
 	print("Parabéns! Você limpou todos os dias.")
+	get_tree().change_scene_to_file("res://Scenes/World/ocean.tscn")
 	get_tree().paused = true
