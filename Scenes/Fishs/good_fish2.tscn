@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cnum5ykym6sqg"]
+[gd_scene load_steps=21 format=3 uid="uid://cnum5ykym6sqg"]
 
 [ext_resource type="Script" path="res://Scripts/Fishs/good_fish2.gd" id="1_cbdwa"]
 [ext_resource type="Texture2D" uid="uid://bfjcex06ijrsw" path="res://Sprites/Fishes/Good/Fish2_good.png" id="1_qc0hj"]
@@ -121,6 +121,10 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t5ks2"]
+radius = 20.0
+height = 48.0
+
 [node name="GoodFish2" type="Node2D"]
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
@@ -128,4 +132,9 @@ script = ExtResource("1_cbdwa")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
 sprite_frames = SubResource("SpriteFrames_5b5am")
-animation = &"Transform"
+animation = &"Bad_Fish"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(2, 2)
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_t5ks2")

@@ -1,0 +1,120 @@
+[gd_scene load_steps=7 format=3 uid="uid://bo3ad6m7mo4j2"]
+
+[ext_resource type="Texture2D" uid="uid://dbjfma4cij0qo" path="res://Sprites/Background/Good_ocean.png" id="1_1nv00"]
+[ext_resource type="Script" path="res://game_over.gd" id="1_3dudm"]
+[ext_resource type="FontFile" uid="uid://b3ps5cdpj0hf2" path="res://Fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="2_ap8dv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6hp85"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_dj6dl"]
+font = ExtResource("2_ap8dv")
+font_size = 100
+font_color = Color(1, 1, 0, 1)
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 10
+shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_8uk8e"]
+font = ExtResource("2_ap8dv")
+font_size = 15
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Game Over" type="Node"]
+script = ExtResource("1_3dudm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_6hp85")
+position = Vector2(966, 822.5)
+scale = Vector2(2.53646, 2.73437)
+texture = ExtResource("1_1nv00")
+
+[node name="ColorRect" type="ColorRect" parent="Sprite2D"]
+anchors_preset = -1
+anchor_top = -0.182292
+offset_left = -384.0
+offset_top = -272.0
+offset_right = 384.0
+offset_bottom = -95.0
+color = Color(0.243137, 0.47451, 0.866667, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Game Over" type="Label" parent="."]
+offset_top = -0.00012207
+offset_right = 1944.0
+offset_bottom = 1083.0
+text = "GAME OVER"
+label_settings = SubResource("LabelSettings_dj6dl")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextEdit" type="TextEdit" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -530.5
+offset_top = 103.5
+offset_right = 530.5
+offset_bottom = 334.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Envolto nas sombras da mente, Nereu finalmente cedeu aos seus medos mais profundos. A luta foi árdua, mas o peso da realidade se mostrou insuportável. Ao aceitar a sua morte, ele encontrou um trágico alívio nas profundezas da escuridão. Sua jornada termina aqui, lembrando-nos da frágil linha entre a esperança e o desespero. Agora, Marecita perde seu herói que limpava o fundo do mar, deixando um oceano de lixo e tristeza em seu lugar.
+
+
+
+
+
+
+"
+label_settings = SubResource("LabelSettings_8uk8e")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -116.0
+offset_top = 256.0
+offset_right = 116.0
+offset_bottom = 364.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="MenuButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../ExitButton")
+theme_override_colors/font_focus_color = Color(1, 1, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/icon_max_width = 10
+theme_override_fonts/font = ExtResource("2_ap8dv")
+text = "Voltar ao menu"
+flat = true
+
+[node name="ExitButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../MenuButton")
+theme_override_colors/font_focus_color = Color(1, 1, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/icon_max_width = 10
+theme_override_fonts/font = ExtResource("2_ap8dv")
+text = "Sair do jogo"
+flat = true
+
+[connection signal="pressed" from="VBoxContainer/MenuButton" to="." method="_on_menu_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

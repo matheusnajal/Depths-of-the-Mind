@@ -37,6 +37,12 @@ var lixos_ativos = []
 @onready var camera = $Player/CharacterBody2D/Camera2D  # Referência à câmera para ajustar surtos
 #@onready var victory_screen = $VictoryScreen  # Referência à tela de vitória
 
+@onready var music_player = $AudioStreamPlayer2D  # Ajuste o caminho, se necessário
+
+@onready var modified_music = load("res://Musics/fear of the bottom of the sea.mp3") as AudioStream
+@onready var original_music = load("res://Musics/Exploring the seabed.mp3") as AudioStream
+
+
 func _ready():
 	add_child(spawn_timer)
 	gerar_lixos()
@@ -44,6 +50,9 @@ func _ready():
 	spawn_timer.one_shot = false    
 	spawn_timer.start()
 	spawn_timer.timeout.connect(spawn_mob)
+	
+	GlobalSignals.connect("background_changed_to_modified", Callable(self, "_on_background_changed_to_modified"))
+	GlobalSignals.connect("background_changed_to_original", Callable(self, "_on_background_changed_to_original"))
 
 	if hud != null:
 		hud.update_lixos_restantes(qtdLixosAtuais)
@@ -170,6 +179,18 @@ func advance_day():
 		gerar_lixos()
 	else:
 		end_game()
+
+
+func _on_background_changed_to_modified() -> void:
+	if music_player:
+		music_player.stream = modified_music
+		music_player.play()
+
+func _on_background_changed_to_original() -> void:
+	if music_player:
+		music_player.stream = original_music
+		music_player.play()
+
 
 func end_game():
 	print("Parabéns! Você limpou todos os dias.")

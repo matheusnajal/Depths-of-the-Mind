@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7prcat6wxj3h"
-path="res://.godot/imported/RS.png-578396a65cfa67a73b8007d1b693b744.ctex"
+uid="uid://cnilcvig38phm"
+path="res://.godot/imported/hud_bg.png-ffa46f82e3ed0efc1427ac3cbb5c6c7e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Itens/RS.png"
-dest_files=["res://.godot/imported/RS.png-578396a65cfa67a73b8007d1b693b744.ctex"]
+source_file="res://Sprites/Player/hud_bg.png"
+dest_files=["res://.godot/imported/hud_bg.png-ffa46f82e3ed0efc1427ac3cbb5c6c7e.ctex"]
 
 [params]
 

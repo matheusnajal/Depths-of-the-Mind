@@ -2,8 +2,8 @@ extends Camera2D
 
 @export var randomStrength: float = 30.0
 @export var shakeFade: float = 5.0
-@export var min_time: float = 0.00
-@export var max_time: float = 10.00
+@export var min_time: float = 20.00
+@export var max_time: float = 30.00
 @export var shake_duration: float = 5.00
 @export var max_shake_strength: float = 10.0
 

@@ -15,6 +15,7 @@ var oxygen_decrease_timer = Timer.new()
 var mensagem_label = null
 
 func _ready():
+	GlobalSignals.player = self
 	add_child(oxygen_decrease_timer)
 	oxygen_decrease_timer.wait_time = 3.0
 	oxygen_decrease_timer.one_shot = false
