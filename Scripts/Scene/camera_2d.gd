@@ -28,7 +28,6 @@ func _ready() -> void:
 func start_random_shake_timer() -> void:
 	var random_time = rng.randf_range(min_time, max_time)
 	
-	# Configura um Timer para o shake inicial
 	var shake_timer = Timer.new()
 	shake_timer.wait_time = random_time
 	shake_timer.one_shot = true
@@ -114,3 +113,28 @@ func activate_shader() -> void:
 func deactivate_shader() -> void:
 	if color_rect_with_shader:
 		color_rect_with_shader.hide()
+
+# Nova função para resetar timers e restaurar o cenário
+func reset_shake_timers():
+	# Para todos os timers filhos do nó, removendo-os
+	for child in get_children():
+		if child is Timer:
+			child.queue_free()
+
+	# Garante que não está tremendo
+	is_shaking = false
+	shake_Strength = 0.0
+	deactivate_shader()
+
+	# Volta o oceano para a versão boa (caso já não esteja)
+	if sprite_to_change:
+		var original_texture = load(original_texture_path) as Texture2D
+		if original_texture:
+			sprite_to_change.texture = original_texture
+
+		var color_rect = sprite_to_change.get_node("ColorRect")
+		if color_rect and color_rect is ColorRect:
+			color_rect.color = original_color
+
+	# Não chama start_random_shake_timer aqui, pois queremos que comece "zerado"
+	# Deixe para iniciar novamente se necessário, mais tarde.

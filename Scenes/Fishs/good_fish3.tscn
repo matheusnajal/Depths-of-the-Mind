@@ -128,6 +128,8 @@ height = 38.0
 [node name="GoodFish3" type="Node2D"]
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+collision_layer = 8
+collision_mask = 8
 script = ExtResource("1_02vcw")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
@@ -137,4 +139,11 @@ animation = &"Bad_Fish"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 position = Vector2(1, -3)
 rotation = -1.5708
+shape = SubResource("CapsuleShape2D_dqbe8")
+
+[node name="Area2D" type="Area2D" parent="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Area2D"]
+position = Vector2(-2, -3.99999)
+rotation = 3.14159
 shape = SubResource("CapsuleShape2D_dqbe8")

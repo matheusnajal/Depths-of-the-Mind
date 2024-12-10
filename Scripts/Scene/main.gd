@@ -32,24 +32,30 @@ var lixos_ativos = []
 @export var max_surge_time_limit: float = 10.0
 
 @onready var spawn_timer = Timer.new()
-@onready var hud = $HUD  # Certifique-se de que o caminho está correto
-@onready var jogador = $Player/CharacterBody2D  # Ajuste o caminho conforme necessário
-@onready var camera = $Player/CharacterBody2D/Camera2D  # Referência à câmera para ajustar surtos
-
-@onready var music_player = $AudioStreamPlayer2D  # Ajuste o caminho, se necessário
-
+@onready var hud = $HUD
+@onready var jogador = $Player/CharacterBody2D
+@onready var camera = $Player/CharacterBody2D/Camera2D
+@onready var music_player = $AudioStreamPlayer2D
 @onready var modified_music = load("res://Musics/fear of the bottom of the sea.mp3") as AudioStream
 @onready var original_music = load("res://Musics/Exploring the seabed.mp3") as AudioStream
-
 @onready var player = $Player/CharacterBody2D
+@onready var transition_rect = $HUD/CanvasLayer/FadeColorReact
+@onready var boat = $Barco/TextureRect
+@onready var collisionBoat = $Barco/CollisionShape2D
 
-var in_modified_ocean: bool = false  # Novo estado para verificar o cenário
+var in_modified_ocean: bool = false
+
+var spawn_fish_index = 1  # Dia 1: peixe 2
+var spawn_interval = 5.0  # Dia 1: a cada 5s
 
 func _ready():
 	add_child(spawn_timer)
 	gerar_lixos()
-	spawn_timer.wait_time = 2.0
-	spawn_timer.one_shot = false    
+
+	spawn_fish_index = 1
+	spawn_interval = 5.0
+	spawn_timer.wait_time = spawn_interval
+	spawn_timer.one_shot = false
 	spawn_timer.start()
 	spawn_timer.timeout.connect(spawn_mob)
 	
@@ -58,34 +64,15 @@ func _ready():
 
 	if hud != null:
 		hud.update_lixos_restantes(qtdLixosAtuais)
-	else:
-		print("Erro: Referência ao HUD é null!")
-
-	if hud != null:
 		hud.update_dinheiro(dinheiro)
-	else:
-		print("Erro: Referência ao HUD é null!")
-
-	if hud != null:
 		hud.update_nivel_item(nivel_item_limpeza)
-	else:
-		print("Erro: Referência ao HUD é null!")
-
-	if hud != null:
 		hud.update_dia(current_day)
-	else:
-		print("Erro: Referência ao HUD é null!")
-
-	if camera == null:
-		print("Erro: Câmera não encontrada! Verifique o caminho '$Player/CharacterBody2D/Camera2D'.")
-	else:
-		print("Câmera encontrada: ", camera)
 
 func spawn_mob():
 	if mobs_atual >= max_mobs or in_modified_ocean:
 		return
 
-	var mob_scene = mob_scenes[randi() % mob_scenes.size()]
+	var mob_scene = mob_scenes[spawn_fish_index]
 	var mob_instance = mob_scene.instantiate()
 	
 	var random_x = randf() * 1920
@@ -123,24 +110,22 @@ func gerar_lixos():
 	
 	if hud != null:
 		hud.update_lixos_restantes(qtdLixosAtuais)
-	else:
-		print("Erro: Referência ao HUD é null!")
 
 func _on_lixo_limpo():
 	dinheiro += 5
 	if hud != null:
 		hud.update_dinheiro(dinheiro)
-	else:
-		print("Erro: Referência ao HUD é null!")
 	
 	qtdLixosAtuais -= 1
 	if hud != null:
 		hud.update_lixos_restantes(qtdLixosAtuais)
-	else:
-		print("Erro: Referência ao HUD é null!")
 	
 	if qtdLixosAtuais <= 0 and not in_modified_ocean:
-		advance_day()
+		# Se for o ultimo dia (dia 3) significa que o jogo terminou com sucesso
+		if current_day == total_days:
+			await end_game()
+		else:
+			await transition_to_next_day()
 
 func _on_lixo_removido(lixo_instance):
 	if lixo_instance in lixos_ativos:
@@ -155,49 +140,55 @@ func clear_existing_trash():
 func advance_day():
 	if current_day < total_days:
 		current_day += 1
-		print("Dia " + str(current_day) + " iniciado!")
-
 		qtdLixos += trash_increment_per_day
 		max_mobs += max_mobs_increment_per_day
 
-		# Ajuste os tempos de surto na câmera
 		if camera != null:
 			camera.min_time = max(camera.min_time - surge_interval_decrement_per_day, min_surge_time_limit)
 			camera.max_time = max(camera.max_time - surge_interval_decrement_per_day, max_surge_time_limit)
 			camera.shake_duration = max(camera.shake_duration - surge_duration_decrement_per_day, 1.0)
-		else:
-			print("Erro: Não foi possível ajustar os tempos de surto na câmera porque a referência está nula.")
 
-		# Atualize o HUD
 		if hud != null:
 			hud.update_dia(current_day)
-		else:
-			print("Erro: Referência ao HUD é null!")
 
-		# Atualize a quantidade de lixos atuais
 		qtdLixosAtuais = qtdLixos
 		if hud != null:
 			hud.update_lixos_restantes(qtdLixosAtuais)
-		else:
-			print("Erro: Referência ao HUD é null!")
 
-		# Gerar novos lixos
 		gerar_lixos()
-
-		# Resetar o oxigênio do jogador
 		reset_oxygen()
+		reset_health()
+
+		match current_day:
+			1:
+				pass
+			2:
+				spawn_fish_index = 0
+				spawn_interval = 10.0
+			3:
+				spawn_fish_index = 2
+				spawn_interval = 15.0
+
+		spawn_timer.wait_time = spawn_interval
 	else:
-		end_game()
+		# Se chegou além do total de dias, tela de vitória
+		await end_game()
 
 func reset_oxygen():
 	player.oxygen = 99
 	player.update_oxygen_cylinder()
+
+func reset_health():
+	player.current_health = player.max_health
+	player.update_health_display()
 
 func _on_background_changed_to_modified() -> void:
 	in_modified_ocean = true
 	if music_player:
 		music_player.stream = modified_music
 		music_player.play()
+	boat.visible = false
+	collisionBoat.disabled = true
 	toggle_lixos_visibility(false)
 
 func _on_background_changed_to_original() -> void:
@@ -205,6 +196,8 @@ func _on_background_changed_to_original() -> void:
 	if music_player:
 		music_player.stream = original_music
 		music_player.play()
+	boat.visible = true
+	collisionBoat.disabled = false
 	toggle_lixos_visibility(true)
 
 func toggle_lixos_visibility(visible: bool) -> void:
@@ -212,7 +205,33 @@ func toggle_lixos_visibility(visible: bool) -> void:
 		lixo.visible = visible
 		lixo.set_process(visible)
 
+# Função chamada quando passa pro próximo dia
+func transition_to_next_day():
+	await fade_in_black_screen()
+	advance_day()
+	camera.reset_shake_timers()
+	await fade_out_black_screen()
+	camera.start_random_shake_timer()
+
 func end_game():
-	print("Parabéns! Você limpou todos os dias.")
-	get_tree().change_scene_to_file("res://Scenes/World/ocean.tscn")
-	get_tree().paused = true
+	await transition_to_screen("res://Scenes/Menu/Vitoria.tscn")
+
+func game_over():
+	await transition_to_screen("res://Scenes/Menu/game_over.tscn")
+
+func transition_to_screen(scene_path: String):
+	await fade_in_black_screen(2.0)
+	get_tree().change_scene_to_file(scene_path)
+
+func fade_in_black_screen(duration := 2.0):
+	transition_rect.visible = true
+	transition_rect.modulate.a = 0.0
+	var tween = get_tree().create_tween()
+	tween.tween_property(transition_rect, "modulate:a", 1.0, duration)
+	await tween.finished
+
+func fade_out_black_screen(duration := 2.0):
+	var tween = get_tree().create_tween()
+	tween.tween_property(transition_rect, "modulate:a", 0.0, duration)
+	await tween.finished
+	transition_rect.visible = false

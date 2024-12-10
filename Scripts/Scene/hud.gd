@@ -14,9 +14,10 @@ func update_dinheiro(dinheiro):
 
 func update_nivel_item(nivel):
 	lvl_item_label.text = "Lvl: %d" % nivel
+
 	
 func update_dia(dia):
-	dia_label.text = "Dia: " + str(dia)
+	dia_label.text = "Dia " + str(dia)
 
 func mostrar_mensagem(texto):
 	mensagem_label.text = texto

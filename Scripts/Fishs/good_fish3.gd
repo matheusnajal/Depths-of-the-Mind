@@ -3,7 +3,8 @@ extends CharacterBody2D
 @export var speed: float = 100
 @export var screen_size: Vector2 = Vector2(1920, 1080)
 @onready var animated_sprite = $AnimatedSprite2D
-@onready var collision_shape = $CollisionShape2D
+@onready var collision_shape = $CollisionShape2D  # Colisão física
+@onready var damage_area = $Area2D  # Área para detecção de dano
 @onready var direction_timer = Timer.new()
 
 var direction = Vector2.ZERO
@@ -11,7 +12,8 @@ var next_animation: String = "Swimming"
 var is_transforming: bool = false
 
 func _ready():
-	collision_shape.disabled = true
+	# Conecta o sinal do Area2D para notificar o jogador
+	damage_area.connect("body_entered", Callable(self, "_on_body_entered"))
 	animated_sprite.play("Swimming")
 	_change_direction()
 
@@ -32,12 +34,12 @@ func _physics_process(delta: float) -> void:
 
 	# Comportamento depende da animação atual
 	if animated_sprite.animation == "Bad_Fish" and GlobalSignals.player:
-		speed = 125  # Corrige a atribuição
-		collision_shape.disabled = false  # Ativa a colisão
+		speed = 275  # Velocidade quando "mau"
+		damage_area.set_monitoring(true)  # Ativa a detecção de dano
 		direction = (GlobalSignals.player.global_position - global_position).normalized()
 	else:
-		speed = 100  # Retorna a velocidade padrão
-		collision_shape.disabled = true  # Desativa a colisão
+		speed = 175  # Velocidade padrão
+		damage_area.set_monitoring(false)  # Desativa a detecção de dano
 		if direction == Vector2.ZERO:
 			_change_direction()  # Evita que fique parado
 
@@ -59,30 +61,30 @@ func _physics_process(delta: float) -> void:
 	animated_sprite.flip_h = direction.x < 0
 
 func _change_direction() -> void:
-	# Define uma nova direção aleatória
 	var angle = randf() * PI * 2
 	direction = Vector2(cos(angle), sin(angle)).normalized()
 
 func play_transform_animation() -> void:
-	# Troca a animação com transição
 	is_transforming = true
 	speed = 0
-	collision_shape.disabled = true  # Desativa a colisão durante a transformação
+	damage_area.set_monitoring(false)  # Desativa a detecção de dano durante a transformação
 	animated_sprite.play("Transform")
 	animated_sprite.connect("animation_finished", Callable(self, "_on_transform_finished"))
 
 func _on_background_changed_to_modified() -> void:
-	print("Sinal de fundo modificado recebido!")
 	next_animation = "Bad_Fish"
 	play_transform_animation()
 
 func _on_background_changed_to_original() -> void:
-	print("Sinal de fundo original recebido!")
 	next_animation = "Swimming"
 	play_transform_animation()
 
 func _on_transform_finished() -> void:
-	# Finaliza a transformação
 	animated_sprite.disconnect("animation_finished", Callable(self, "_on_transform_finished"))
 	is_transforming = false
 	animated_sprite.play(next_animation)
+
+func _on_body_entered(body):
+	# Notifica o jogador que ele foi atingido
+	if animated_sprite.animation == "Bad_Fish" and body.is_in_group("Jogador"):
+		body.take_damage()  # Chama diretamente o método `take_damage` do jogador
