@@ -6,6 +6,7 @@ extends CharacterBody2D
 @export var hit_deceleration = 300
 @export var sprint_multiplier = 1.5
 @onready var transition_rect = $"../../HUD/CanvasLayer/FadeColorReact"
+@onready var hit_sound = $AudioStreamPlayer2D
 
 @export var max_health = 3
 var current_health = max_health
@@ -157,6 +158,7 @@ func take_damage():
 	if is_invincible or current_health <= 0 or is_hit_animation_playing:
 		return
 
+	hit_sound.play()
 	current_health -= 1
 	update_health_display()
 

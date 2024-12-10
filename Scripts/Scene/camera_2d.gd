@@ -19,6 +19,7 @@ var rng = RandomNumberGenerator.new()
 
 var shake_Strength: float = 0.0
 var is_shaking: bool = false
+@onready var shake_sound = $AudioStreamPlayer2D
 
 func _ready() -> void:
 	if color_rect_with_shader:
@@ -45,6 +46,7 @@ func _on_shake_to_modified() -> void:
 	shake_timer.start()
 
 func _on_shake_end_to_modified() -> void:
+	shake_sound.stop()
 	is_shaking = false
 	deactivate_shader()
 
@@ -75,6 +77,7 @@ func _on_wait_to_original_shake() -> void:
 	shake_timer.start()
 
 func _on_shake_end_to_original() -> void:
+	shake_sound.stop()
 	is_shaking = false
 	deactivate_shader()
 
@@ -92,6 +95,7 @@ func _on_shake_end_to_original() -> void:
 	start_random_shake_timer()
 
 func apply_shake(intensity: float) -> void:
+	shake_sound.play()
 	shake_Strength = clamp(intensity, 0, max_shake_strength)
 	is_shaking = true
 	activate_shader()
@@ -122,6 +126,7 @@ func reset_shake_timers():
 			child.queue_free()
 
 	# Garante que não está tremendo
+	shake_sound.stop()
 	is_shaking = false
 	shake_Strength = 0.0
 	deactivate_shader()

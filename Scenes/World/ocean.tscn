@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://wpl7cmclu0aw"]
+[gd_scene load_steps=53 format=3 uid="uid://wpl7cmclu0aw"]
 
 [ext_resource type="Script" path="res://Scripts/Scene/main.gd" id="1_c6lr8"]
 [ext_resource type="Texture2D" uid="uid://dbjfma4cij0qo" path="res://Sprites/Background/Good_ocean.png" id="2_pf1n0"]
@@ -10,13 +10,16 @@
 [ext_resource type="Script" path="res://Scripts/Scene/camera_2d.gd" id="7_0mwyo"]
 [ext_resource type="Shader" path="res://Scripts/Effect.gdshader" id="8_d8xho"]
 [ext_resource type="Texture2D" uid="uid://d2mv3d6as4ed" path="res://Sprites/Itens/cilindroOxigeni.png" id="9_dc0xy"]
+[ext_resource type="AudioStream" uid="uid://5yf3cfqr68xd" path="res://FX/male_hurt7-48124.mp3" id="10_lv2fh"]
 [ext_resource type="FontFile" uid="uid://b3ps5cdpj0hf2" path="res://Fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="10_rhyeh"]
+[ext_resource type="AudioStream" uid="uid://dkboijee1p0qs" path="res://FX/earth-rumble-6953.mp3" id="10_ty3gg"]
 [ext_resource type="AudioStream" uid="uid://b85bucjtfnojr" path="res://Musics/Exploring the seabed.mp3" id="11_b74i0"]
 [ext_resource type="Script" path="res://Scripts/Scene/hud.gd" id="12_h2k4d"]
 [ext_resource type="Texture2D" uid="uid://d08xph5pbfqcr" path="res://Sprites/Itens/barcoARemo.webp" id="14_jl1vj"]
 [ext_resource type="Script" path="res://Scripts/Scene/barco.gd" id="14_vvcuf"]
 [ext_resource type="Texture2D" uid="uid://cd3a52vdd7jgh" path="res://Sprites/Player/nereu.jpg" id="15_ckclx"]
 [ext_resource type="Texture2D" uid="uid://blft0jcdriekn" path="res://Sprites/HUD/heart.png" id="15_dkvdd"]
+[ext_resource type="AudioStream" uid="uid://2f33kniaxcxa" path="res://FX/tomar-un-objeto-46562.mp3" id="19_coc16"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nqgql"]
 
@@ -295,9 +298,15 @@ offset_top = -556.0
 offset_right = 925.0
 offset_bottom = 566.0
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Player/CharacterBody2D/Camera2D"]
+stream = ExtResource("10_ty3gg")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/CharacterBody2D"]
 position = Vector2(3.5, 4)
 shape = SubResource("RectangleShape2D_re5xx")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Player/CharacterBody2D"]
+stream = ExtResource("10_lv2fh")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("11_b74i0")
@@ -450,3 +459,7 @@ expand_mode = 1
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Barco"]
 position = Vector2(3, 109.5)
 shape = SubResource("RectangleShape2D_vq2mh")
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("19_coc16")
+volume_db = 5.0

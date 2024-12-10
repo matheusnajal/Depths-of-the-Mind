@@ -42,6 +42,7 @@ var lixos_ativos = []
 @onready var transition_rect = $HUD/CanvasLayer/FadeColorReact
 @onready var boat = $Barco/TextureRect
 @onready var collisionBoat = $Barco/CollisionShape2D
+@onready var take_trash = $AudioStreamPlayer2D2
 
 var in_modified_ocean: bool = false
 
@@ -129,6 +130,7 @@ func _on_lixo_limpo():
 
 func _on_lixo_removido(lixo_instance):
 	if lixo_instance in lixos_ativos:
+		take_trash.play()
 		lixos_ativos.erase(lixo_instance)
 
 func clear_existing_trash():
@@ -136,6 +138,7 @@ func clear_existing_trash():
 		if lixo.is_inside_tree():
 			lixo.queue_free()
 	lixos_ativos.clear()
+	
 
 func advance_day():
 	if current_day < total_days:
