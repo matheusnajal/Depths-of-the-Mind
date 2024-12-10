@@ -49,6 +49,10 @@ var in_modified_ocean: bool = false
 var spawn_fish_index = 1  # Dia 1: peixe 2
 var spawn_interval = 5.0  # Dia 1: a cada 5s
 
+@export var original_color: Color = Color("0a5aace9")
+@export var modified_color: Color = Color("db3735")
+@onready var background_HUD = $HUD/Fundo_HUD
+
 func _ready():
 	add_child(spawn_timer)
 	gerar_lixos()
@@ -193,6 +197,10 @@ func _on_background_changed_to_modified() -> void:
 	boat.visible = false
 	collisionBoat.disabled = true
 	toggle_lixos_visibility(false)
+	
+	# Altera a cor do background_HUD para a cor modificada
+	if background_HUD != null:
+		background_HUD.modulate = modified_color
 
 func _on_background_changed_to_original() -> void:
 	in_modified_ocean = false
@@ -202,6 +210,10 @@ func _on_background_changed_to_original() -> void:
 	boat.visible = true
 	collisionBoat.disabled = false
 	toggle_lixos_visibility(true)
+	
+	# Altera a cor do background_HUD para a cor original
+	if background_HUD != null:
+		background_HUD.modulate = original_color
 
 func toggle_lixos_visibility(visible: bool) -> void:
 	for lixo in lixos_ativos:

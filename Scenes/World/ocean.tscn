@@ -323,7 +323,7 @@ offset_right = 408.0
 offset_bottom = 133.0
 color = Color(1, 0.713726, 0, 1)
 
-[node name="ColorRect" type="ColorRect" parent="HUD"]
+[node name="Fundo_HUD" type="ColorRect" parent="HUD"]
 offset_top = 3.0
 offset_right = 404.0
 offset_bottom = 130.0
