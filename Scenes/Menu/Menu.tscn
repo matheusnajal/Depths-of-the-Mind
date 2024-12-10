@@ -47,10 +47,10 @@ offset_bottom = 559.163
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
-offset_left = 866.0
-offset_top = 632.0
-offset_right = 1033.0
-offset_bottom = 740.0
+offset_left = 695.0
+offset_top = 476.0
+offset_right = 862.0
+offset_bottom = 584.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 alignment = 1
@@ -92,10 +92,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 1945.0
-offset_bottom = 1099.0
+offset_left = -205.0
+offset_top = -203.0
+offset_right = 1760.0
+offset_bottom = 916.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(1, 1, 0, 1)
@@ -112,10 +112,10 @@ vertical_alignment = 1
 
 [node name="Frase" type="Label" parent="."]
 layout_mode = 0
-offset_left = 550.0
-offset_top = 600.0
-offset_right = 1370.0
-offset_bottom = 610.0
+offset_left = 371.0
+offset_top = 413.0
+offset_right = 1191.0
+offset_bottom = 423.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 5
 theme_override_fonts/font = ExtResource("3_50vnv")

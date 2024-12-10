@@ -48,9 +48,10 @@ color = Color(0.243137, 0.47451, 0.866667, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="Parabéns" type="Label" parent="."]
-offset_top = -81.0001
-offset_right = 1944.0
-offset_bottom = 1002.0
+offset_left = -238.0
+offset_top = -259.0
+offset_right = 1706.0
+offset_bottom = 824.0
 text = "Parabéns!"
 label_settings = SubResource("LabelSettings_f6s84")
 horizontal_alignment = 1
@@ -58,10 +59,10 @@ vertical_alignment = 1
 script = ExtResource("4_cvyoo")
 
 [node name="Mensagem_RGB" type="Label" parent="."]
-offset_left = 666.0
-offset_top = 543.0
-offset_right = 1262.0
-offset_bottom = 566.0
+offset_left = 428.0
+offset_top = 357.0
+offset_right = 1024.0
+offset_bottom = 380.0
 text = "Parabéns, herói dos mares e da mente!"
 label_settings = SubResource("LabelSettings_dg7qs")
 horizontal_alignment = 1

@@ -47,9 +47,10 @@ autoplay = true
 parameters/looping = false
 
 [node name="Game Over" type="Label" parent="."]
-offset_top = -0.00012207
-offset_right = 1944.0
-offset_bottom = 1083.0
+offset_left = -270.0
+offset_top = -165.0
+offset_right = 1674.0
+offset_bottom = 918.0
 text = "GAME OVER"
 label_settings = SubResource("LabelSettings_dj6dl")
 horizontal_alignment = 1
