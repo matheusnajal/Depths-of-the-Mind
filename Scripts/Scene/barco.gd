@@ -3,9 +3,9 @@ extends Area2D
 var jogador_proximo = false
 
 # Dados dos aprimoramentos
-var niveis = [10, 30, 50, 70]  # Custos para os níveis 2 a 5
-var reducoes = [0.9, 0.7, 0.5, 0.3]  # Fatores multiplicativos do tempo de limpeza
-var nivel_maximo = 5  # Nível máximo do item de limpeza
+var niveis = [10, 20, 30, 50, 70]  # Custos para os níveis 2 a 6
+var reducoes = [0.9, 0.7, 0.5, 0.3, 0.1]  # Fatores multiplicativos do tempo de limpeza
+var nivel_maximo = 6  # Nível máximo do item de limpeza
 
 func _ready():
 	body_entered.connect(_on_body_entered)
@@ -64,6 +64,12 @@ func tentar_aprimorar():
 		exibir_mensagem_jogador("Aprimoramento comprado")
 		# Atualiza a mensagem de aprimoramento
 		mostrar_mensagem_aprimoramento()
+
+		# **Mudança 2: aumenta max_speed do jogador a cada upgrade**
+		principal.jogador.max_speed += 25
+
+		# **Mudança 3: atualiza a taxa de oxigênio do jogador conforme o nível**
+		principal.jogador.update_oxygen_rate(principal.nivel_item_limpeza)
 	else:
 		# Exibe mensagem de erro acima do jogador
 		exibir_mensagem_jogador("Você não tem dinheiro suficiente")

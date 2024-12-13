@@ -1,7 +1,25 @@
-[gd_scene load_steps=8 format=3 uid="uid://d25r2fx213j3f"]
+[gd_scene load_steps=21 format=3 uid="uid://d25r2fx213j3f"]
 
 [ext_resource type="Script" path="res://Scripts/Fishs/good_fish3.gd" id="1_02vcw"]
+[ext_resource type="Texture2D" uid="uid://drkyjg7xgxdn5" path="res://Sprites/Fishes/Bad/Fish3_evil.png" id="2_g7l38"]
 [ext_resource type="Texture2D" uid="uid://dppjwko5wvyv1" path="res://Sprites/Fishes/Good/Fish3_good.png" id="2_lsl6y"]
+[ext_resource type="Texture2D" uid="uid://cfq0hl5utcdrn" path="res://Sprites/FX/Transition.png" id="4_1kkc0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c4vr1"]
+atlas = ExtResource("2_g7l38")
+region = Rect2(0, 0, 40, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jcjuv"]
+atlas = ExtResource("2_g7l38")
+region = Rect2(40, 0, 40, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_868ew"]
+atlas = ExtResource("2_g7l38")
+region = Rect2(80, 0, 40, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iqhgk"]
+atlas = ExtResource("2_g7l38")
+region = Rect2(120, 0, 40, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n70p6"]
 atlas = ExtResource("2_lsl6y")
@@ -19,8 +37,49 @@ region = Rect2(78, 0, 39, 20)
 atlas = ExtResource("2_lsl6y")
 region = Rect2(117, 0, 39, 20)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_5h87o"]
+atlas = ExtResource("4_1kkc0")
+region = Rect2(0, 0, 52, 53)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2phgo"]
+atlas = ExtResource("4_1kkc0")
+region = Rect2(52, 0, 52, 53)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eej2w"]
+atlas = ExtResource("4_1kkc0")
+region = Rect2(104, 0, 52, 53)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a8581"]
+atlas = ExtResource("4_1kkc0")
+region = Rect2(156, 0, 52, 53)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_88ct5"]
+atlas = ExtResource("4_1kkc0")
+region = Rect2(208, 0, 52, 53)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ue47j"]
+atlas = ExtResource("4_1kkc0")
+region = Rect2(260, 0, 52, 53)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_ab86e"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c4vr1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jcjuv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_868ew")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iqhgk")
+}],
+"loop": true,
+"name": &"Bad_Fish",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_n70p6")
@@ -37,13 +96,54 @@ animations = [{
 "loop": true,
 "name": &"Swimming",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5h87o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2phgo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eej2w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a8581")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_88ct5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ue47j")
+}],
+"loop": false,
+"name": &"Transform",
+"speed": 5.0
 }]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dqbe8"]
+radius = 8.0
+height = 38.0
 
 [node name="GoodFish3" type="Node2D"]
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+collision_layer = 8
+collision_mask = 8
 script = ExtResource("1_02vcw")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
 sprite_frames = SubResource("SpriteFrames_ab86e")
-animation = &"Swimming"
+animation = &"Bad_Fish"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(1, -3)
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_dqbe8")
+
+[node name="Area2D" type="Area2D" parent="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Area2D"]
+position = Vector2(-2, -3.99999)
+rotation = 3.14159
+shape = SubResource("CapsuleShape2D_dqbe8")

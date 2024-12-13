@@ -1,22 +1,47 @@
-[gd_scene load_steps=41 format=3 uid="uid://wpl7cmclu0aw"]
+[gd_scene load_steps=53 format=3 uid="uid://wpl7cmclu0aw"]
 
 [ext_resource type="Script" path="res://Scripts/Scene/main.gd" id="1_c6lr8"]
 [ext_resource type="Texture2D" uid="uid://dbjfma4cij0qo" path="res://Sprites/Background/Good_ocean.png" id="2_pf1n0"]
 [ext_resource type="Script" path="res://Scripts/Player/Diver_Ocean.gd" id="3_vmybt"]
+[ext_resource type="Texture2D" uid="uid://djffpy75ndj0j" path="res://Sprites/Player/Diver_hit.png" id="4_gupsi"]
 [ext_resource type="Texture2D" uid="uid://dhcbmj5baagxv" path="res://Sprites/Player/Diver_idle.png" id="4_jws88"]
 [ext_resource type="Texture2D" uid="uid://cvfds7x2883tm" path="res://Sprites/Player/Diver_sprint.png" id="5_tabk0"]
 [ext_resource type="Texture2D" uid="uid://cmp77l3hg4a20" path="res://Sprites/Player/Diver_swimming.png" id="6_4yvro"]
 [ext_resource type="Script" path="res://Scripts/Scene/camera_2d.gd" id="7_0mwyo"]
 [ext_resource type="Shader" path="res://Scripts/Effect.gdshader" id="8_d8xho"]
 [ext_resource type="Texture2D" uid="uid://d2mv3d6as4ed" path="res://Sprites/Itens/cilindroOxigeni.png" id="9_dc0xy"]
+[ext_resource type="AudioStream" uid="uid://5yf3cfqr68xd" path="res://FX/male_hurt7-48124.mp3" id="10_lv2fh"]
 [ext_resource type="FontFile" uid="uid://b3ps5cdpj0hf2" path="res://Fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="10_rhyeh"]
+[ext_resource type="AudioStream" uid="uid://dkboijee1p0qs" path="res://FX/earth-rumble-6953.mp3" id="10_ty3gg"]
 [ext_resource type="AudioStream" uid="uid://b85bucjtfnojr" path="res://Musics/Exploring the seabed.mp3" id="11_b74i0"]
 [ext_resource type="Script" path="res://Scripts/Scene/hud.gd" id="12_h2k4d"]
-[ext_resource type="Texture2D" uid="uid://c7prcat6wxj3h" path="res://Sprites/Itens/RS.png" id="13_58u4o"]
 [ext_resource type="Texture2D" uid="uid://d08xph5pbfqcr" path="res://Sprites/Itens/barcoARemo.webp" id="14_jl1vj"]
 [ext_resource type="Script" path="res://Scripts/Scene/barco.gd" id="14_vvcuf"]
+[ext_resource type="Texture2D" uid="uid://cd3a52vdd7jgh" path="res://Sprites/Player/nereu.jpg" id="15_ckclx"]
+[ext_resource type="Texture2D" uid="uid://blft0jcdriekn" path="res://Sprites/HUD/heart.png" id="15_dkvdd"]
+[ext_resource type="AudioStream" uid="uid://2f33kniaxcxa" path="res://FX/tomar-un-objeto-46562.mp3" id="19_coc16"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nqgql"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y682y"]
+atlas = ExtResource("4_gupsi")
+region = Rect2(0, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_54e4m"]
+atlas = ExtResource("4_gupsi")
+region = Rect2(80, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dva42"]
+atlas = ExtResource("4_gupsi")
+region = Rect2(160, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gmg4g"]
+atlas = ExtResource("4_gupsi")
+region = Rect2(240, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_82mmx"]
+atlas = ExtResource("4_gupsi")
+region = Rect2(320, 0, 80, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fjd6o"]
 atlas = ExtResource("4_jws88")
@@ -84,6 +109,26 @@ region = Rect2(320, 0, 80, 80)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8277f"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y682y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_54e4m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dva42")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gmg4g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_82mmx")
+}],
+"loop": true,
+"name": &"Hit",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_fjd6o")
@@ -157,7 +202,14 @@ shader_parameter/shake_block_size = 30.5
 shader_parameter/shake_color_rate = 0.05
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_re5xx"]
-size = Vector2(59, 26)
+size = Vector2(33, 32)
+
+[sub_resource type="LabelSettings" id="LabelSettings_4o0u6"]
+font = ExtResource("10_rhyeh")
+font_size = 25
+font_color = Color(0.486275, 0.662745, 0.360784, 1)
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_rlifx"]
 font = ExtResource("10_rhyeh")
@@ -168,16 +220,30 @@ outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_tt2ew"]
 font = ExtResource("10_rhyeh")
+font_size = 25
 font_color = Color(1, 1, 1, 0.972549)
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_x6i7b"]
 font = ExtResource("10_rhyeh")
-font_size = 9
-font_color = Color(1, 1, 1, 0.854902)
+font_size = 10
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_gst86"]
 font = ExtResource("10_rhyeh")
-font_size = 14
+font_size = 15
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_185ar"]
+font = ExtResource("10_rhyeh")
+font_size = 15
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vq2mh"]
 size = Vector2(214.5, 103)
@@ -205,12 +271,13 @@ metadata/_edit_use_anchors_ = true
 position = Vector2(992, 542)
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="Player" groups=["Jogador"]]
-collision_mask = 6
+collision_mask = 7
 script = ExtResource("3_vmybt")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player/CharacterBody2D"]
 sprite_frames = SubResource("SpriteFrames_8277f")
-animation = &"Swimming"
+animation = &"Hit"
+frame_progress = 0.973877
 
 [node name="Camera2D" type="Camera2D" parent="Player/CharacterBody2D"]
 position = Vector2(-5, -1)
@@ -231,9 +298,15 @@ offset_top = -556.0
 offset_right = 925.0
 offset_bottom = 566.0
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Player/CharacterBody2D/Camera2D"]
+stream = ExtResource("10_ty3gg")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/CharacterBody2D"]
-position = Vector2(-2.5, 1)
+position = Vector2(3.5, 4)
 shape = SubResource("RectangleShape2D_re5xx")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Player/CharacterBody2D"]
+stream = ExtResource("10_lv2fh")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("11_b74i0")
@@ -243,60 +316,90 @@ parameters/looping = false
 [node name="HUD" type="CanvasLayer" parent="."]
 script = ExtResource("12_h2k4d")
 
+[node name="ColorRect2" type="ColorRect" parent="HUD"]
+offset_left = -3.0
+offset_top = -4.0
+offset_right = 408.0
+offset_bottom = 133.0
+color = Color(1, 0.713726, 0, 1)
+
+[node name="Fundo_HUD" type="ColorRect" parent="HUD"]
+offset_top = 3.0
+offset_right = 404.0
+offset_bottom = 130.0
+color = Color(0.0392157, 0.352941, 0.67451, 0.913725)
+
+[node name="money" type="Label" parent="HUD"]
+offset_left = 214.0
+offset_top = 78.0
+offset_right = 239.0
+offset_bottom = 114.0
+text = "$"
+label_settings = SubResource("LabelSettings_4o0u6")
+
 [node name="dinheiroLabel" type="Label" parent="HUD"]
-offset_left = 208.0
-offset_top = 126.0
-offset_right = 293.0
-offset_bottom = 185.0
+offset_left = 239.0
+offset_top = 78.0
+offset_right = 264.0
+offset_bottom = 103.0
 text = "1"
 label_settings = SubResource("LabelSettings_rlifx")
 
-[node name="TextureRect" type="TextureRect" parent="HUD"]
-offset_left = 130.0
-offset_top = 97.0
-offset_right = 200.0
-offset_bottom = 164.0
-texture = ExtResource("13_58u4o")
-expand_mode = 1
-
 [node name="LvlItem" type="Label" parent="HUD"]
-offset_left = 132.0
-offset_top = 40.0
-offset_right = 233.0
-offset_bottom = 90.0
-text = "Lvl: 1"
+offset_left = 211.0
+offset_top = 17.0
+offset_right = 386.0
+offset_bottom = 42.0
+text = "Lvl 1"
 label_settings = SubResource("LabelSettings_tt2ew")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="HUD"]
 
-[node name="TextureRect" type="TextureRect" parent="HUD/CanvasLayer"]
+[node name="OxigenioBar" type="TextureRect" parent="HUD/CanvasLayer"]
 anchors_preset = -1
-anchor_left = 0.044
-anchor_top = 0.125
-anchor_right = 0.044
-anchor_bottom = 0.125
-offset_left = -86.48
-offset_top = -75.0
-offset_right = 86.52
-offset_bottom = 76.0
+anchor_left = 0.086
+anchor_top = 0.061
+anchor_right = 0.086
+anchor_bottom = 0.061
+offset_left = -75.12
+offset_top = -62.88
+offset_right = 75.88
+offset_bottom = 67.12
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("9_dc0xy")
 expand_mode = 1
 
-[node name="TextEdit" type="TextEdit" parent="HUD/CanvasLayer/TextureRect"]
+[node name="TextEdit" type="TextEdit" parent="HUD/CanvasLayer/OxigenioBar"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.566
-anchor_right = 0.5
-anchor_bottom = 0.566
-offset_left = -12.5
-offset_top = -6.466
-offset_right = 31.5
-offset_bottom = 16.534
+anchor_left = 0.244
+anchor_top = 0.443
+anchor_right = 0.244
+anchor_bottom = 0.443
+offset_left = 26.156
+offset_top = 9.67401
+offset_right = 61.156
+offset_bottom = 32.674
 theme_override_colors/background_color = Color(0, 0, 0, 0)
 theme_override_fonts/font = ExtResource("10_rhyeh")
 theme_override_font_sizes/font_size = 9
 text = "99%"
+
+[node name="TextureRect" type="TextureRect" parent="HUD/CanvasLayer"]
+offset_left = 2.0
+offset_top = 3.0
+offset_right = 128.0
+offset_bottom = 130.0
+texture = ExtResource("15_ckclx")
+expand_mode = 1
+
+[node name="FadeColorReact" type="ColorRect" parent="HUD/CanvasLayer"]
+visible = false
+offset_top = -15.0
+offset_right = 1947.0
+offset_bottom = 1087.0
+color = Color(0, 0, 0, 1)
 
 [node name="MensagemLabel" type="Label" parent="HUD"]
 offset_left = 798.0
@@ -306,11 +409,40 @@ offset_bottom = 86.0001
 label_settings = SubResource("LabelSettings_x6i7b")
 
 [node name="LixosRestantesLabel" type="Label" parent="HUD"]
-offset_left = 1098.0
-offset_top = 22.0
-offset_right = 1186.0
-offset_bottom = 63.0
+offset_left = 129.0
+offset_top = 147.0
+offset_right = 217.0
+offset_bottom = 188.0
 label_settings = SubResource("LabelSettings_gst86")
+
+[node name="Dia" type="Label" parent="HUD"]
+offset_left = 9.0
+offset_top = 147.0
+offset_right = 119.0
+offset_bottom = 170.0
+label_settings = SubResource("LabelSettings_185ar")
+
+[node name="Borda Nereu" type="ColorRect" parent="HUD"]
+offset_right = 131.0
+offset_bottom = 130.0
+color = Color(1, 0.713726, 0, 1)
+
+[node name="HeartContainer" type="Node" parent="HUD"]
+
+[node name="Heart1" type="Sprite2D" parent="HUD/HeartContainer"]
+position = Vector2(307.188, 91.0719)
+scale = Vector2(1.55147, 1.53827)
+texture = ExtResource("15_dkvdd")
+
+[node name="Heart2" type="Sprite2D" parent="HUD/HeartContainer"]
+position = Vector2(342.641, 90.5312)
+scale = Vector2(1.60484, 1.59301)
+texture = ExtResource("15_dkvdd")
+
+[node name="Heart3" type="Sprite2D" parent="HUD/HeartContainer"]
+position = Vector2(378.825, 90.6937)
+scale = Vector2(1.62653, 1.58535)
+texture = ExtResource("15_dkvdd")
 
 [node name="Barco" type="Area2D" parent="."]
 position = Vector2(867, -71)
@@ -327,3 +459,7 @@ expand_mode = 1
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Barco"]
 position = Vector2(3, 109.5)
 shape = SubResource("RectangleShape2D_vq2mh")
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("19_coc16")
+volume_db = 5.0

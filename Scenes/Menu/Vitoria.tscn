@@ -1,0 +1,137 @@
+[gd_scene load_steps=10 format=3 uid="uid://nc87kn0w8li4"]
+
+[ext_resource type="Script" path="res://Scripts/Menu/node.gd" id="1_f65ai"]
+[ext_resource type="Texture2D" uid="uid://dbjfma4cij0qo" path="res://Sprites/Background/Good_ocean.png" id="2_iwm22"]
+[ext_resource type="FontFile" uid="uid://b3ps5cdpj0hf2" path="res://Fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="3_0u6lg"]
+[ext_resource type="Script" path="res://Scripts/Menu/color_rect.gd" id="4_cvyoo"]
+[ext_resource type="AudioStream" uid="uid://dl1w0jfo10vxq" path="res://Musics/Mar de Alegría.mp3" id="5_wdqdt"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_85oi8"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_f6s84"]
+font = ExtResource("3_0u6lg")
+font_size = 100
+font_color = Color(1, 1, 0, 1)
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 10
+shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_dg7qs"]
+font = ExtResource("3_0u6lg")
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_lpn84"]
+font = ExtResource("3_0u6lg")
+font_size = 15
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Node" type="Node"]
+script = ExtResource("1_f65ai")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_85oi8")
+position = Vector2(966, 822.5)
+scale = Vector2(2.53646, 2.73437)
+texture = ExtResource("2_iwm22")
+
+[node name="ColorRect" type="ColorRect" parent="Sprite2D"]
+anchors_preset = -1
+anchor_top = -0.182292
+offset_left = -384.0
+offset_top = -272.0
+offset_right = 384.0
+offset_bottom = -95.0
+color = Color(0.243137, 0.47451, 0.866667, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Parabéns" type="Label" parent="."]
+offset_left = -8.0
+offset_top = -181.0
+offset_right = 2003.0
+offset_bottom = 1163.0
+text = "Parabéns!"
+label_settings = SubResource("LabelSettings_f6s84")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_cvyoo")
+
+[node name="Mensagem_RGB" type="Label" parent="."]
+offset_left = 659.0
+offset_top = 574.0
+offset_right = 1255.0
+offset_bottom = 597.0
+text = "Parabéns, herói dos mares e da mente!"
+label_settings = SubResource("LabelSettings_dg7qs")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+script = ExtResource("4_cvyoo")
+
+[node name="Texto" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -532.0
+offset_top = 89.0
+offset_right = 529.0
+offset_bottom = 320.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Você enfrentou as profundezas mais desafiadoras, não apenas do oceano, mas também de sua própria mente. Assim como as águas turvas que limpou, você encarou a confusão e o peso da esquizofrenia e, com coragem, emergiu vitorioso.
+
+Você não apenas salvou o oceano, mas provou que é possível limpar os próprios mares internos e navegar rumo à superação. O mundo está mais brilhante porque você não desistiu."
+label_settings = SubResource("LabelSettings_lpn84")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -121.0
+offset_top = 307.0
+offset_right = 111.0
+offset_bottom = 415.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="MenuButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../ExitButton")
+theme_override_colors/font_focus_color = Color(1, 1, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/icon_max_width = 10
+theme_override_fonts/font = ExtResource("3_0u6lg")
+text = "Voltar ao menu"
+flat = true
+
+[node name="ExitButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../MenuButton")
+theme_override_colors/font_focus_color = Color(1, 1, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/icon_max_width = 10
+theme_override_fonts/font = ExtResource("3_0u6lg")
+text = "Sair do jogo"
+flat = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_wdqdt")
+autoplay = true
+parameters/looping = false
+
+[connection signal="pressed" from="VBoxContainer/MenuButton" to="." method="_on_menu_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

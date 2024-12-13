@@ -6,13 +6,23 @@ var mobs_atual: int = 0
 
 @onready var spawn_timer = Timer.new()
 
+@onready var Titulo = $"Título"
+@onready var Frase = $Frase
+@onready var Box = $VBoxContainer
+@onready var Creditos = $"Créditos"
+
 func _ready():
+	# Configuração inicial
 	$VBoxContainer/StartButton.grab_focus()
 	add_child(spawn_timer)
 	spawn_timer.wait_time = 2.0
 	spawn_timer.one_shot = false
 	spawn_timer.start()
 	spawn_timer.timeout.connect(spawn_mob)
+	
+	# Instancia mobs iniciais
+	for i in range(max_mobs):
+		spawn_mob()
 
 func spawn_mob():
 	if mobs_atual >= max_mobs:
@@ -38,3 +48,17 @@ func _on_start_button_pressed() -> void:
 
 func _on_exit_button_pressed() -> void:
 	get_tree().quit()
+
+func _on_credits_pressed() -> void:
+	$"Créditos/Voltar".grab_focus()
+	Titulo.visible = false
+	Frase.visible = false
+	Box.visible = false
+	Creditos.visible = true
+
+func _on_voltar_pressed() -> void:
+	$VBoxContainer/StartButton.grab_focus()
+	Titulo.visible = true
+	Frase.visible = true
+	Box.visible = true
+	Creditos.visible = false
