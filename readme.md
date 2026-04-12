@@ -19,12 +19,6 @@
 
 ---
 
-## Sobre o Jogo
-
-**Depths of the Mind** busca criar uma experiência imersiva, colocando o jogador no papel de uma pessoa que passa por um surto de esquizofrenia. A narrativa foca em explorar a perspectiva do protagonista e os desafios enfrentados durante o surto, além de oferecer opções de como lidar com a situação.
-
----
-
 ## Objetivos
 
 - **Conscientização:** Mostrar os desafios de quem convive com a esquizofrenia e o impacto de traumas negligenciados.  
